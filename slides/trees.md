@@ -22,6 +22,7 @@ as _random forest_ and _gradient boosting trees_, as we will see.
 
 - What is a decision tree?
 - Training trees for classification & regression
+- Impact of the tree depth on overfitting
 
 ---
 class: center, middle
@@ -210,6 +211,51 @@ Choosing a maximum size can significantly impact the generalization performance
 of the model.
 
 ---
+class: center, middle
+
+# Tree depth and overfitting
+
+How the maximum depth impacts generalization?
+
+---
+class: split-3columns
+# Tree: underfit / overfit tradeoff
+
+.column[
+<img src="../figures/dt_underfit.svg" width="100%">
+]
+
+--
+
+.column[
+<img src="../figures/dt_fit.svg" width="100%">
+]
+
+--
+
+.column[
+<img src="../figures/dt_overfit.svg" width="100%">
+]
+
+--
+
+.column[
+.center[Underfitting]
+
+.center.small[`max_depth` or `max_leaf_nodes` too&nbsp;small]
+]
+
+.column[
+.center[Best trade-off]
+]
+
+.column[
+.center[Overfitting]
+
+.center.small[`max_depth` or `max_leaf_nodes` too&nbsp;large]
+]
+
+---
 
 # Take home messages
 
@@ -220,6 +266,10 @@ of the model.
 --
 
 - No scaling required for numerical features
+
+--
+
+- `max_depth` controls the trade-off between underfitting and overfitting
 
 --
 

@@ -357,7 +357,7 @@ class: split-50
 .column2[
 <img src="../figures/lin_not_separable.svg">
 
-**Not** linearly separable →&nbsp;Underfitting
+**Not** linearly separable
 ]
 
 
@@ -382,7 +382,7 @@ a the following notebooks.
  - **classification**: logistic regression
 
 --
-* Can underfit when: `n_features << n_samples`
+* Can perform poorly when: `n_features << n_samples`
   →&nbsp;engineering new features can help!
 
 --

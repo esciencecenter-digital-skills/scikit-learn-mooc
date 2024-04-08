@@ -490,6 +490,78 @@ and classification for qualitative properties.
 
 ---
 
+class: center, middle
+
+# Machine learning algorithms
+How do we extract rules from data that generalize to new observations?
+
+???
+There are different algorithms for abstracting rules from data to make predictions. 
+We will highlight a few families, without going into details
+
+---
+# Linear models
+<img src="../figures/linear_fit_red.svg" width="60%">
+
+???
+
+Linear models: fit a straight line through the data that minimizes the prediction error.
+We will discuss the intuition of linear models in the course
+
+---
+
+# Decision trees
+<img src="../figures/tree_example.svg" width="100%" style="float: right">
+
+???
+
+Decision trees: Decision trees make decisions by asking a series of questions and choosing the best path based on the answers.
+The 'decisions' are based on the patterns in the data.
+
+We will discuss the intuition of decision trees later in the course
+
+---
+
+# Support Vector Machines (SVMs)
+<img src="../figures/svm.png" width="50%" >
+
+???
+
+SVM finds the best way to separate different classes in data by creating a clear gap between them.
+
+---
+
+# Ensemble learning
+<img src="../figures/ensemble-learning.png" width="50%" style="float: left">
+
+???
+
+Combine different (weak) classifiers by aggregating their individual outputs into one prediction.
+
+---
+
+# Neural networks
+<img src="../figures/neural-network.png" width="100%" style="float: right">
+
+???
+
+Neural networks consist of artificial neurons: small units that integrate information in a simple, yet adaptable way. 
+Through combining a lot of neurons in different layers the neural network can learn patterns in the data.
+
+---
+
+# Distinction between machine learning, deep learning, and artificial intelligence
+<img src="../figures/ai-ml-dl-distinction.png" width="100%" style="float: left">
+
+???
+
+Machine learning (ML) refers to techniques where a computer can “learn” patterns in data, usually by being shown numerous examples to train it. 
+People often talk about machine learning being a form of artificial intelligence (AI). 
+Definitions of artificial intelligence vary, but usually involve having computers mimic the behaviour of intelligent biological systems. 
+
+Deep learning is a subset of ML in which 'deep' neural networks are used: with a lot of layers.
+
+---
 .center[
 
 # Take home messages

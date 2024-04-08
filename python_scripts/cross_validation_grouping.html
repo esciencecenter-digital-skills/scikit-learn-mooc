@@ -1,0 +1,1144 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Sample grouping &#8212; Scikit-learn course</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sklearn_mooc.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/matomo.js"></script>
+    <script src="../_static/sklearn_mooc.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'python_scripts/cross_validation_grouping';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Non i.i.d. data" href="cross_validation_time.html" />
+    <link rel="prev" title="Stratification" href="cross_validation_stratification.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../toc.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/scikit-learn-logo.png" class="logo__image only-light" alt="Scikit-learn course - Home"/>
+    <script>document.write(`<img src="../_static/scikit-learn-logo.png" class="logo__image only-dark" alt="Scikit-learn course - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Introduction</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Machine Learning Concepts</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ml_concepts/slides.html">🎥 Introducing machine-learning concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml_concepts/quiz_intro_01.html">✅ Quiz Intro.01</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">The predictive modeling pipeline</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/predictive_modeling_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_index.html">Tabular data exploration</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration.html">First look at our dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_ex_01.html">📝 Exercise M1.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_sol_01.html">📃 Solution for Exercise M1.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.html">✅ Quiz M1.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_index.html">Fitting a scikit-learn model on numerical data</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_introduction.html">First model with scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_ex_00.html">📝 Exercise M1.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_sol_00.html">📃 Solution for Exercise M1.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_hands_on.html">Working with numerical data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_ex_01.html">📝 Exercise M1.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_sol_01.html">📃 Solution for Exercise M1.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_scaling.html">Preprocessing for numerical features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation.html">🎥 Validation of a model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_numerical_pipeline_cross_validation.html">Model evaluation using cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02.html">✅ Quiz M1.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_index.html">Handling categorical data</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline.html">Encoding of categorical variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_ex_01.html">📝 Exercise M1.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_sol_01.html">📃 Solution for Exercise M1.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_column_transformer.html">Using numerical and categorical variables together</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_ex_02.html">📝 Exercise M1.05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_sol_02.html">📃 Solution for Exercise M1.05</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.html">🎥 Visualizing scikit-learn pipelines in Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_visualization.html">Visualizing scikit-learn pipelines in Jupyter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.html">✅ Quiz M1.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/wrap_up_quiz.html">🏁 Wrap-up quiz 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../predictive_modeling_pipeline/predictive_modeling_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Selecting the best model</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_overfitting_underfitting_index.html">Overfitting and underfitting</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_slides.html">🎥 Overfitting and Underfitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_train_test.html">Cross-validation framework</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/overfitting_vs_under_fitting_quiz_m2_01.html">✅ Quiz M2.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_validation_learning_curves_index.html">Validation and learning curves</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_slides.html">🎥 Comparing train and test errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_validation_curve.html">Overfit-generalization-underfit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_learning_curve.html">Effect of the sample size in cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_01.html">📝 Exercise M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_01.html">📃 Solution for Exercise M2.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/learning_validation_curves_quiz_m2_02.html">✅ Quiz M2.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../overfit/overfit_bias_variance_index.html">Bias versus variance trade-off</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_slides.html">🎥 Bias versus Variance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../overfit/bias_vs_variance_quiz_m2_03.html">✅ Quiz M2.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_wrap_up_quiz.html">🏁 Wrap-up quiz 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overfit/overfit_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Hyperparameter tuning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/parameter_tuning_manual_index.html">Manual tuning</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-7"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_manual.html">Set and get hyperparameters in scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_ex_02.html">📝 Exercise M3.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_sol_02.html">📃 Solution for Exercise M3.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_manual_quiz_m3_01.html">✅ Quiz M3.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../tuning/parameter_tuning_automated_index.html">Automated tuning</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-8"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_grid_search.html">Hyperparameter tuning by grid-search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_randomized_search.html">Hyperparameter tuning by randomized-search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_parallel_plot_video.html">🎥 Analysis of hyperparameter search results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_parallel_plot.html">Analysis of hyperparameter search results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_nested.html">Evaluation and hyperparameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_ex_03.html">📝 Exercise M3.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="parameter_tuning_sol_03.html">📃 Solution for Exercise M3.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tuning/parameter_tuning_automated_quiz_m3_02.html">✅ Quiz M3.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_wrap_up_quiz.html">🏁 Wrap-up quiz 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tuning/parameter_tuning_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Linear models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_intuitions_index.html">Intuitions on linear models</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-9"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_slides.html">🎥 Intuitions on linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_without_sklearn.html">Linear regression without scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_01.html">📝 Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_01.html">📃 Solution for Exercise M4.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_in_sklearn.html">Linear regression using scikit-learn</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logistic_regression.html">Linear models for classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_01.html">✅ Quiz M4.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_non_linear_index.html">Non-linear feature engineering for linear models</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-10"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="linear_regression_non_linear_link.html">Non-linear feature engineering for Linear Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_02.html">📝 Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_02.html">📃 Solution for Exercise M4.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_feature_engineering_classification.html">Non-linear feature engineering for Logistic Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_03.html">📝 Exercise M4.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_03.html">📃 Solution for Exercise M4.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_02.html">✅ Quiz M4.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../linear_models/linear_models_regularization_index.html">Regularization in linear model</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-11"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/regularized_linear_models_slides.html">🎥 Intuitions on regularized linear models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_regularization.html">Regularization of linear regression model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_ex_04.html">📝 Exercise M4.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linear_models_sol_04.html">📃 Solution for Exercise M4.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linear_models/linear_models_quiz_m4_03.html">✅ Quiz M4.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_wrap_up_quiz.html">🏁 Wrap-up quiz 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linear_models/linear_models_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Decision tree models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_intuitions_index.html">Intuitions on tree-based models</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-12"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../trees/slides.html">🎥 Intuitions on tree-based models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_01.html">✅ Quiz M5.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_classification_index.html">Decision tree in classification</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-13"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_classification.html">Build a classification decision tree</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_ex_01.html">📝 Exercise M5.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_sol_01.html">📃 Solution for Exercise M5.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_02.html">✅ Quiz M5.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_regression_index.html">Decision tree in regression</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-14"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_regression.html">Decision tree for regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_ex_02.html">📝 Exercise M5.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="trees_sol_02.html">📃 Solution for Exercise M5.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_03.html">✅ Quiz M5.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../trees/trees_hyperparameters_index.html">Hyperparameters of decision tree</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-15"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_hyperparameters.html">Importance of decision tree hyperparameters on generalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../trees/trees_quiz_m5_04.html">✅ Quiz M5.04</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_wrap_up_quiz.html">🏁 Wrap-up quiz 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../trees/trees_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Ensemble of models</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_bootstrap_index.html">Ensemble method using bootstrapping</a><input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-16"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/bagging_slides.html">🎥 Intuitions on ensemble models: bagging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_introduction.html">Introductory example to ensemble models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_bagging.html">Bagging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_01.html">📝 Exercise M6.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_01.html">📃 Solution for Exercise M6.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_random_forest.html">Random forests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_02.html">📝 Exercise M6.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_02.html">📃 Solution for Exercise M6.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_01.html">✅ Quiz M6.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_boosting_index.html">Ensemble based on boosting</a><input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-17"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/boosting_slides.html">🎥 Intuitions on ensemble models: boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_adaboost.html">Adaptive Boosting (AdaBoost)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_gradient_boosting.html">Gradient-boosting decision tree (GBDT)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_03.html">📝 Exercise M6.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_03.html">📃 Solution for Exercise M6.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_hist_gradient_boosting.html">Speeding-up gradient-boosting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_02.html">✅ Quiz M6.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ensemble/ensemble_hyperparameters_index.html">Hyperparameter tuning with ensemble methods</a><input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-18"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_hyperparameters.html">Hyperparameter tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_ex_04.html">📝 Exercise M6.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ensemble_sol_04.html">📃 Solution for Exercise M6.04</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ensemble/ensemble_quiz_m6_03.html">✅ Quiz M6.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_wrap_up_quiz.html">🏁 Wrap-up quiz 6</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ensemble/ensemble_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluating model performance</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_module_intro.html">Module overview</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_baseline_index.html">Comparing a model with simple baselines</a><input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-19"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_baseline.html">Comparing model performance with a simple baseline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_ex_02.html">📝 Exercise M7.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_sol_02.html">📃 Solution for Exercise M7.01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_01.html">✅ Quiz M7.01</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../evaluation/cross_validation_choices_index.html">Choice of cross-validation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-20"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_stratification.html">Stratification</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Sample grouping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_time.html">Non i.i.d. data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_02.html">✅ Quiz M7.02</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/cross_validation_nested_index.html">Nested cross-validation</a><input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-21"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="cross_validation_nested.html">Nested cross-validation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_03.html">✅ Quiz M7.03</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_classification_index.html">Classification metrics</a><input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-22"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics_classification.html">Classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_ex_01.html">📝 Exercise M7.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_sol_01.html">📃 Solution for Exercise M7.02</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_04.html">✅ Quiz M7.04</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../evaluation/metrics_regression_index.html">Regression metrics</a><input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-23"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="metrics_regression.html">Regression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_ex_02.html">📝 Exercise M7.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metrics_sol_02.html">📃 Solution for Exercise M7.03</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../evaluation/evaluation_quiz_m7_05.html">✅ Quiz M7.05</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_wrap_up_quiz.html">🏁 Wrap-up quiz 7</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../evaluation/evaluation_module_take_away.html">Main take-away</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Concluding remarks</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../concluding_remarks_video.html">🎥 Concluding remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concluding_remarks.html">Concluding remarks</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../appendix/glossary.html">Glossary</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../appendix/datasets_intro.html">Datasets description</a><input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-24"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="trees_dataset.html">The penguins datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_adult_census.html">The adult census dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_california_housing.html">The California housing dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_ames_housing.html">The Ames housing dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_blood_transfusion.html">The blood transfusion dataset</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets_bike_rides.html">The bike rides dataset</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/acknowledgement.html">Acknowledgement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/notebook_timings.html">Notebook timings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../appendix/toc_redirect.html">Table of contents</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Feature selection</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_module_intro.html">Module overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature_selection_introduction.html">Benefits of using feature selection</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../feature_selection/feature_selection_limitation_index.html">Caveats of feature selection</a><input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-25"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_ex_01.html">📝 Exercise 01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_sol_01.html">📃 Solution for Exercise 01</a></li>
+<li class="toctree-l2"><a class="reference internal" href="feature_selection_limitation_model.html">Limitation of selecting feature using a model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_module_take_away.html">Main take-away</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../feature_selection/feature_selection_quiz.html">✅ Quiz</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">🚧 Interpretation</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="dev_features_importance.html">Feature importance</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../interpretation/interpretation_quiz.html">✅ Quiz</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/INRIA/scikit-learn-mooc/main?urlpath=tree/python_scripts/cross_validation_grouping.py" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/INRIA/scikit-learn-mooc" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/INRIA/scikit-learn-mooc/edit/main/python_scripts/cross_validation_grouping.py" target="_blank"
+   class="btn btn-sm btn-source-edit-button dropdown-item"
+   title="Suggest edit"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="btn__text-container">Suggest edit</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/INRIA/scikit-learn-mooc/issues/new?title=Issue%20on%20page%20%2Fpython_scripts/cross_validation_grouping.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/python_scripts/cross_validation_grouping.py" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.py</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sample grouping</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sample-grouping">
+<h1>Sample grouping<a class="headerlink" href="#sample-grouping" title="Permalink to this heading">#</a></h1>
+<p>We are going to linger into the concept of sample groups. As in the previous
+section, we will give an example to highlight some surprising results. This
+time, we will use the handwritten digits dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_digits</span>
+
+<span class="n">digits</span> <span class="o">=</span> <span class="n">load_digits</span><span class="p">()</span>
+<span class="n">data</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">digits</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">digits</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will recreate the same model used in the previous notebook: a logistic
+regression classifier with a preprocessor to scale the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">MinMaxScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">MinMaxScaler</span><span class="p">(),</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1_000</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We will use the same baseline model. We will use a <code class="docutils literal notranslate"><span class="pre">KFold</span></code> cross-validation
+without shuffling the data at first.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">KFold</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test_score_no_shuffling</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;The average accuracy is &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_score_no_shuffling</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_score_no_shuffling</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average accuracy is 0.931 ± 0.027
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s repeat the experiment by shuffling the data within the
+cross-validation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">test_score_with_shuffling</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">&quot;The average accuracy is &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_score_with_shuffling</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± &quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">test_score_with_shuffling</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average accuracy is 0.966 ± 0.011
+</pre></div>
+</div>
+</div>
+</div>
+<p>We observe that shuffling the data improves the mean accuracy. We could go a
+little further and plot the distribution of the testing score. We can first
+concatenate the test scores.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">all_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">test_score_no_shuffling</span><span class="p">,</span> <span class="n">test_score_with_shuffling</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;KFold without shuffling&quot;</span><span class="p">,</span> <span class="s2">&quot;KFold with shuffling&quot;</span><span class="p">],</span>
+<span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s plot the distribution now.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">all_scores</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Accuracy score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of the test scores&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/b04ed4c0751a3539ca05ad8b4617463275d20055d489d6985ad27b6a6e0db19f.png" src="../_images/b04ed4c0751a3539ca05ad8b4617463275d20055d489d6985ad27b6a6e0db19f.png" />
+</div>
+</div>
+<p>The cross-validation testing error that uses the shuffling has less variance
+than the one that does not impose any shuffling. It means that some specific
+fold leads to a low score in this case.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">test_score_no_shuffling</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.94166667 0.89722222 0.94707521 0.96657382 0.90250696]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Thus, there is an underlying structure in the data that shuffling will break
+and get better results. To get a better understanding, we should read the
+documentation shipped with the dataset.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">digits</span><span class="o">.</span><span class="n">DESCR</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>.. _digits_dataset:
+
+Optical recognition of handwritten digits dataset
+--------------------------------------------------
+
+**Data Set Characteristics:**
+
+:Number of Instances: 1797
+:Number of Attributes: 64
+:Attribute Information: 8x8 image of integer pixels in the range 0..16.
+:Missing Attribute Values: None
+:Creator: E. Alpaydin (alpaydin &#39;@&#39; boun.edu.tr)
+:Date: July; 1998
+
+This is a copy of the test set of the UCI ML hand-written digits datasets
+https://archive.ics.uci.edu/ml/datasets/Optical+Recognition+of+Handwritten+Digits
+
+The data set contains images of hand-written digits: 10 classes where
+each class refers to a digit.
+
+Preprocessing programs made available by NIST were used to extract
+normalized bitmaps of handwritten digits from a preprinted form. From a
+total of 43 people, 30 contributed to the training set and different 13
+to the test set. 32x32 bitmaps are divided into nonoverlapping blocks of
+4x4 and the number of on pixels are counted in each block. This generates
+an input matrix of 8x8 where each element is an integer in the range
+0..16. This reduces dimensionality and gives invariance to small
+distortions.
+
+For info on NIST preprocessing routines, see M. D. Garris, J. L. Blue, G.
+T. Candela, D. L. Dimmick, J. Geist, P. J. Grother, S. A. Janet, and C.
+L. Wilson, NIST Form-Based Handprint Recognition System, NISTIR 5469,
+1994.
+
+|details-start|
+**References**
+|details-split|
+
+- C. Kaynak (1995) Methods of Combining Multiple Classifiers and Their
+  Applications to Handwritten Digit Recognition, MSc Thesis, Institute of
+  Graduate Studies in Science and Engineering, Bogazici University.
+- E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika.
+- Ken Tang and Ponnuthurai N. Suganthan and Xi Yao and A. Kai Qin.
+  Linear dimensionalityreduction using relevance weighted LDA. School of
+  Electrical and Electronic Engineering Nanyang Technological University.
+  2005.
+- Claudio Gentile. A New Approximate Maximal Margin Classification
+  Algorithm. NIPS. 2000.
+
+|details-end|
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we read carefully, 13 writers wrote the digits of our dataset, accounting
+for a total amount of 1797 samples. Thus, a writer wrote several times the
+same numbers. Let’s suppose that the writer samples are grouped. Subsequently,
+not shuffling the data will keep all writer samples together either in the
+training or the testing sets. Mixing the data will break this structure, and
+therefore digits written by the same writer will be available in both the
+training and testing sets.</p>
+<p>Besides, a writer will usually tend to write digits in the same manner. Thus,
+our model will learn to identify a writer’s pattern for each digit instead of
+recognizing the digit itself.</p>
+<p>We can solve this problem by ensuring that the data associated with a writer
+should either belong to the training or the testing set. Thus, we want to
+group samples for each writer.</p>
+<p>Indeed, we can recover the groups by looking at the target variable.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1,
+       2, 3, 4, 5, 6, 7, 8, 9, 0, 9, 5, 5, 6, 5, 0, 9, 8, 9, 8, 4, 1, 7,
+       7, 3, 5, 1, 0, 0, 2, 2, 7, 8, 2, 0, 1, 2, 6, 3, 3, 7, 3, 3, 4, 6,
+       6, 6, 4, 9, 1, 5, 0, 9, 5, 2, 8, 2, 0, 0, 1, 7, 6, 3, 2, 1, 7, 4,
+       6, 3, 1, 3, 9, 1, 7, 6, 8, 4, 3, 1, 4, 0, 5, 3, 6, 9, 6, 1, 7, 5,
+       4, 4, 7, 2, 8, 2, 2, 5, 7, 9, 5, 4, 8, 8, 4, 9, 0, 8, 9, 8, 0, 1,
+       2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3,
+       4, 5, 6, 7, 8, 9, 0, 9, 5, 5, 6, 5, 0, 9, 8, 9, 8, 4, 1, 7, 7, 3,
+       5, 1, 0, 0, 2, 2, 7, 8, 2, 0, 1, 2, 6, 3, 3, 7, 3, 3, 4, 6, 6, 6,
+       4, 9])
+</pre></div>
+</div>
+</div>
+</div>
+<p>It might not be obvious at first, but there is a structure in the target:
+there is a repetitive pattern that always starts by some series of ordered
+digits from 0 to 9 followed by random digits at a certain point. If we look in
+detail, we see that there are 14 such patterns, always with around 130 samples
+each.</p>
+<p>Even if it is not exactly corresponding to the 13 writers in the documentation
+(maybe one writer wrote two series of digits), we can make the hypothesis that
+each of these patterns corresponds to a different writer and thus a different
+group.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">count</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># defines the lower and upper bounds of sample indices</span>
+<span class="c1"># for each writer</span>
+<span class="n">writer_boundaries</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="mi">130</span><span class="p">,</span>
+    <span class="mi">256</span><span class="p">,</span>
+    <span class="mi">386</span><span class="p">,</span>
+    <span class="mi">516</span><span class="p">,</span>
+    <span class="mi">646</span><span class="p">,</span>
+    <span class="mi">776</span><span class="p">,</span>
+    <span class="mi">915</span><span class="p">,</span>
+    <span class="mi">1029</span><span class="p">,</span>
+    <span class="mi">1157</span><span class="p">,</span>
+    <span class="mi">1287</span><span class="p">,</span>
+    <span class="mi">1415</span><span class="p">,</span>
+    <span class="mi">1545</span><span class="p">,</span>
+    <span class="mi">1667</span><span class="p">,</span>
+    <span class="mi">1797</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="n">groups</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">target</span><span class="p">)</span>
+<span class="n">lower_bounds</span> <span class="o">=</span> <span class="n">writer_boundaries</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">upper_bounds</span> <span class="o">=</span> <span class="n">writer_boundaries</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+<span class="k">for</span> <span class="n">group_id</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">up</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">count</span><span class="p">(),</span> <span class="n">lower_bounds</span><span class="p">,</span> <span class="n">upper_bounds</span><span class="p">):</span>
+    <span class="n">groups</span><span class="p">[</span><span class="n">lb</span><span class="p">:</span><span class="n">up</span><span class="p">]</span> <span class="o">=</span> <span class="n">group_id</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can check the grouping by plotting the indices linked to writer ids.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">groups</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">writer_boundaries</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Target index&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Writer index&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Underlying writer groups existing in the target&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/8296f8f4c56edf8e44542244f87ea8d012ea02cee39e0fbaee08055942e60b69.png" src="../_images/8296f8f4c56edf8e44542244f87ea8d012ea02cee39e0fbaee08055942e60b69.png" />
+</div>
+</div>
+<p>Once we group the digits by writer, we can use cross-validation to take this
+information into account: the class containing <code class="docutils literal notranslate"><span class="pre">Group</span></code> should be used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GroupKFold</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">GroupKFold</span><span class="p">()</span>
+<span class="n">test_score</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="n">groups</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;The average accuracy is </span><span class="si">{</span><span class="n">test_score</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> ± </span><span class="si">{</span><span class="n">test_score</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The average accuracy is 0.921 ± 0.021
+</pre></div>
+</div>
+</div>
+</div>
+<p>We see that this strategy is less optimistic regarding the model
+generalization performance. However, this is the most reliable if our goal is
+to make handwritten digits recognition writers independent. Besides, we can as
+well see that the standard deviation was reduced.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_scores</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">test_score_no_shuffling</span><span class="p">,</span> <span class="n">test_score_with_shuffling</span><span class="p">,</span> <span class="n">test_score</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;KFold without shuffling&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;KFold with shuffling&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;KFold with groups&quot;</span><span class="p">,</span>
+    <span class="p">],</span>
+<span class="p">)</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">all_scores</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Accuracy score&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of the test scores&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ae61c8a287f5b3e50362ad7c2f22bf6517f09de3cf9dcd37c5869423e202e2cc.png" src="../_images/ae61c8a287f5b3e50362ad7c2f22bf6517f09de3cf9dcd37c5869423e202e2cc.png" />
+</div>
+</div>
+<p>As a conclusion, it is really important to take any sample grouping pattern
+into account when evaluating a model. Otherwise, the results obtained will be
+over-optimistic in regards with reality.</p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./python_scripts"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="cross_validation_stratification.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Stratification</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="cross_validation_time.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Non i.i.d. data</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By scikit-learn developers
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <div>
+  <div class="mooc_add">
+   <a href="https://www.fun-mooc.fr/en/courses/machine-learning-python-scikit-learn">Join the full MOOC for better learning!</a>
+  </div>
+  Brought to you under a <a href="https://github.com/INRIA/scikit-learn-mooc/blob/main/LICENSE">CC-BY License</a> by
+  <a href="https://learninglab.inria.fr">Inria Learning Lab</a>,
+  <a href="https://scikit-learn.fondation-inria.fr">scikit-learn @ La Fondation Inria</a>,
+  <a href="https://www.inria-academy.fr/formation/scikit-learn-la-boite-a-outils-de-lapprentissage-automatique/">Inria Academy</a>,
+  with many thanks to the <a href="https://scikit-learn.org">scikit-learn</a> community as a whole!
+</div>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

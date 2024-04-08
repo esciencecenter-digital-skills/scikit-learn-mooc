@@ -189,7 +189,6 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">First look at our dataset</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_ex_01.html">📝 Exercise M1.01</a></li>
 <li class="toctree-l2"><a class="reference internal" href="01_tabular_data_exploration_sol_01.html">📃 Solution for Exercise M1.01</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/01_tabular_data_exploration_quiz_m1_01.html">✅ Quiz M1.01</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/02_numerical_pipeline_index.html">Fitting a scikit-learn model on numerical data</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -518,10 +517,25 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-adult-census-dataset">Loading the adult census dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variables-columns-in-the-dataset">The variables (columns) in the dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-inspection-of-the-data">Visual inspection of the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-decision-rules-by-hand">Creating decision rules by hand</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-recap">Notebook Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-data-individual-columns">Inspecting the data: individual columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visually-inspecting-numerical-columns">Visually inspecting numerical columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-categorical-columns">Inspecting categorical columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#class-imbalance">Class imbalance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-relationships-between-columns">Inspecting relationships between columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-pandas">In pandas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pairplot">Using pairplot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-recap">Notebook Recap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -535,31 +549,25 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="first-look-at-our-dataset">
 <h1>First look at our dataset<a class="headerlink" href="#first-look-at-our-dataset" title="Link to this heading">#</a></h1>
-<p>In this notebook, we look at the necessary steps required before any machine
-learning takes place. It involves:</p>
+<p>Assuming you are familiar with pandas dataframes, in this notebook we look at the
+necessary steps required before any machine learning takes place. It involves:</p>
 <ul class="simple">
-<li><p>loading the data;</p></li>
+<li><p>highlighting that it is crucial to inspect the data before building a model</p></li>
 <li><p>looking at the variables in the dataset, in particular, differentiate
 between numerical and categorical variables, which need different
 preprocessing in most machine learning workflows;</p></li>
 <li><p>visualizing the distribution of the variables to gain some insights into the
 dataset.</p></li>
 </ul>
-<section id="loading-the-adult-census-dataset">
-<h2>Loading the adult census dataset<a class="headerlink" href="#loading-the-adult-census-dataset" title="Link to this heading">#</a></h2>
-<p>We use data from the 1994 US census that we downloaded from
-<a class="reference external" href="http://openml.org/">OpenML</a>.</p>
-<p>You can look at the OpenML webpage to learn more about this dataset:
-<a class="reference external" href="http://www.openml.org/d/1590">http://www.openml.org/d/1590</a></p>
-<p>The dataset is available as a CSV (Comma-Separated Values) file and we use
-<code class="docutils literal notranslate"><span class="pre">pandas</span></code> to read it.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><a class="reference external" href="https://pandas.pydata.org/">Pandas</a> is a Python library used for
-manipulating 1 and 2 dimensional structured data. If you have never used
-pandas, we recommend you look at this
-<a class="reference external" href="https://pandas.pydata.org/docs/user_guide/10min.html">tutorial</a>.</p>
+<p><strong>To the instructor</strong></p>
+<p>Instead of live-coding this notebook, explain the important concepts before ML and show the descriptive statistics.
+TBC.</p>
 </div>
+<section id="loading-the-adult-census-dataset">
+<h2>Loading the adult census dataset<a class="headerlink" href="#loading-the-adult-census-dataset" title="Link to this heading">#</a></h2>
+<p>We use pandas to load the data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -569,24 +577,6 @@ pandas, we recommend you look at this
 </div>
 </div>
 </div>
-<p>The goal with this data is to predict whether a person earns over 50K a year
-from heterogeneous data such as age, employment, education, family
-information, etc.</p>
-</section>
-<section id="the-variables-columns-in-the-dataset">
-<h2>The variables (columns) in the dataset<a class="headerlink" href="#the-variables-columns-in-the-dataset" title="Link to this heading">#</a></h2>
-<p>The data are stored in a <code class="docutils literal notranslate"><span class="pre">pandas</span></code> dataframe. A dataframe is a type of
-structured data composed of 2 dimensions. This type of data is also referred
-as tabular data.</p>
-<p>Each row represents a “sample”. In the field of machine learning or
-descriptive statistics, commonly used equivalent terms are “record”,
-“instance”, or “observation”.</p>
-<p>Each column represents a type of information that has been collected and is
-called a “feature”. In the field of machine learning and descriptive
-statistics, commonly used equivalent terms are “variable”, “attribute”, or
-“covariate”.</p>
-<p>A quick way to inspect the dataframe is to show the first few lines with the
-<code class="docutils literal notranslate"><span class="pre">head</span></code> method:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult_census</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -718,41 +708,43 @@ statistics, commonly used equivalent terms are “variable”, “attribute”, 
 </table>
 </div></div></div>
 </div>
-<p>The column named <strong>class</strong> is our target variable (i.e., the variable which we
-want to predict). The two possible classes are <code class="docutils literal notranslate"><span class="pre">&lt;=50K</span></code> (low-revenue) and
-<code class="docutils literal notranslate"><span class="pre">&gt;50K</span></code> (high-revenue). The resulting prediction problem is therefore a binary
-classification problem as <code class="docutils literal notranslate"><span class="pre">class</span></code> has only two possible values. We use the
-left-over columns (any column other than <code class="docutils literal notranslate"><span class="pre">class</span></code>) as input variables for our
-model.</p>
+<p><strong>Rows and columns</strong></p>
+<ul class="simple">
+<li><p>Each row in the dataframe represents a “sample”. In the field of machine learning or
+descriptive statistics, commonly used equivalent terms are “record”,
+“instance”, or “observation”.</p></li>
+<li><p>Each column represents a type of information that has been collected and is
+called a “feature”. In the field of machine learning and descriptive
+statistics, commonly used equivalent terms are “variable”, “attribute”, or
+“covariate”.</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target_column</span> <span class="o">=</span> <span class="s2">&quot;class&quot;</span>
-<span class="n">adult_census</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">adult_census</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
-&lt;=50K    37155
-&gt;50K     11687
-Name: count, dtype: int64
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([&#39; &lt;=50K&#39;, &#39; &gt;50K&#39;], dtype=object)
 </pre></div>
 </div>
 </div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Here, classes are slightly imbalanced, meaning there are more samples of one
-or more classes compared to others. In this case, we have many more samples
-with <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">&lt;=50K&quot;</span></code> than with <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">&gt;50K&quot;</span></code>. Class imbalance happens often in practice
-and may need special techniques when building a predictive model.</p>
-<p>For example in a medical setting, if we are trying to predict whether subjects
-may develop a rare disease, there would be a lot more healthy subjects than
-ill subjects in the dataset.</p>
-</div>
-<p>The dataset contains both numerical and categorical data. Numerical values
-take continuous values, for example <code class="docutils literal notranslate"><span class="pre">&quot;age&quot;</span></code>. Categorical values can have a
-finite number of values, for example <code class="docutils literal notranslate"><span class="pre">&quot;native-country&quot;</span></code>.</p>
+<p><strong>Target and input variables</strong></p>
+<ul class="simple">
+<li><p>Our target variable is the column <strong>class</strong>.</p></li>
+<li><p>It has two classes: <code class="docutils literal notranslate"><span class="pre">&lt;=50K</span></code> (low-revenue) and
+<code class="docutils literal notranslate"><span class="pre">&gt;50K</span></code> (high-revenue).</p></li>
+<li><p>Thus, the prediction problem is a binary classification problem.</p></li>
+<li><p>The columns other than class are input variables for our model.</p></li>
+</ul>
+<p><strong>Categorical and numerical columns</strong></p>
+<ul class="simple">
+<li><p>There are numerical and categorical columns in the data</p></li>
+<li><p>Numerical columns take continuous values. Example: <code class="docutils literal notranslate"><span class="pre">&quot;age&quot;</span></code></p></li>
+<li><p>Categorical columns take a finite number of values. Example: “<code class="docutils literal notranslate"><span class="pre">native-country</span></code>”</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">numerical_columns</span> <span class="o">=</span> <span class="p">[</span>
@@ -811,8 +803,8 @@ subtract 1, since one of the columns is the target.</p>
 </div>
 </div>
 </section>
-<section id="visual-inspection-of-the-data">
-<h2>Visual inspection of the data<a class="headerlink" href="#visual-inspection-of-the-data" title="Link to this heading">#</a></h2>
+<section id="inspecting-the-data-individual-columns">
+<h2>Inspecting the data: individual columns<a class="headerlink" href="#inspecting-the-data-individual-columns" title="Link to this heading">#</a></h2>
 <p>Before building a predictive model, it is a good idea to look at the data:</p>
 <ul class="simple">
 <li><p>maybe the task you are trying to achieve can be solved without machine
@@ -824,6 +816,8 @@ during data collection (for example, malfunctioning sensor or missing
 values), or from the way the data is processed afterwards (for example
 capped values).</p></li>
 </ul>
+<section id="visually-inspecting-numerical-columns">
+<h3>Visually inspecting numerical columns<a class="headerlink" href="#visually-inspecting-numerical-columns" title="Link to this heading">#</a></h3>
 <p>Let’s look at the distribution of individual features, to get some insights
 about the data. We can start by plotting histograms, note that this only works
 for features containing numerical values:</p>
@@ -837,26 +831,52 @@ for features containing numerical values:</p>
 <img alt="../_images/298bf0502ab4f9843dc4bc4a31777b86fbf2f24e4551b98bcf32087ec1e1892c.png" src="../_images/298bf0502ab4f9843dc4bc4a31777b86fbf2f24e4551b98bcf32087ec1e1892c.png" />
 </div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>In the previous cell, we used the following pattern: <code class="docutils literal notranslate"><span class="pre">_</span> <span class="pre">=</span> <span class="pre">func()</span></code>. We do this
-to avoid showing the output of <code class="docutils literal notranslate"><span class="pre">func()</span></code> which in this case is not that
-useful. We actually assign the output of <code class="docutils literal notranslate"><span class="pre">func()</span></code> into the variable <code class="docutils literal notranslate"><span class="pre">_</span></code>
-(called underscore). By convention, in Python the underscore variable is used
-as a “garbage” variable to store results that we are not interested in.</p>
-</div>
 <p>We can already make a few comments about some of the variables:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;age&quot;</span></code>: there are not that many points for <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;</span> <span class="pre">70</span></code>. The dataset
 description does indicate that retired people have been filtered out
 (<code class="docutils literal notranslate"><span class="pre">hours-per-week</span> <span class="pre">&gt;</span> <span class="pre">0</span></code>);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code>: peak at 10 and 13, hard to tell what it corresponds to
-without looking much further. We’ll do that later in this notebook;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code>: peak at 10 and 13. These are the number of years of education.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;hours-per-week&quot;</span></code> peaks at 40, this was very likely the standard number of
 working hours at the time of the data collection;</p></li>
 <li><p>most values of <code class="docutils literal notranslate"><span class="pre">&quot;capital-gain&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;capital-loss&quot;</span></code> are close to zero.</p></li>
 </ul>
+</section>
+<section id="inspecting-categorical-columns">
+<h3>Inspecting categorical columns<a class="headerlink" href="#inspecting-categorical-columns" title="Link to this heading">#</a></h3>
 <p>For categorical variables, we can look at the distribution of values:</p>
+<ul class="simple">
+<li><p>We should do this for both the target variable and the input variables</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult_census</span><span class="p">[</span><span class="n">target_column</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
+&lt;=50K    37155
+&gt;50K     11687
+Name: count, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<section id="class-imbalance">
+<h4>Class imbalance<a class="headerlink" href="#class-imbalance" title="Link to this heading">#</a></h4>
+<p><strong>Imbalance in the target variable</strong></p>
+<ul class="simple">
+<li><p>Classes are slightly imbalanced, meaning there are more samples of one
+or more classes compared to others.</p></li>
+<li><p>In this case, we have many more samples with <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">&lt;=50K&quot;</span></code> than with <code class="docutils literal notranslate"><span class="pre">&quot;</span> <span class="pre">&gt;50K&quot;</span></code>.</p></li>
+<li><p>Class imbalance in the target variable happens often in practice
+and may need special techniques when building a predictive model.</p></li>
+<li><p>For example in a medical setting, if we are trying to predict whether subjects
+may develop a rare disease, there would be a lot more healthy subjects than
+ill subjects in the dataset.</p></li>
+</ul>
+<p><strong>Imbalance in the input data</strong></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult_census</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -872,56 +892,26 @@ Name: count, dtype: int64
 </div>
 </div>
 </div>
-<p>Note that the data collection process resulted in an important imbalance
-between the number of male/female samples.</p>
-<p>Be aware that training a model with such data imbalance can cause
-disproportioned prediction errors for the under-represented groups. This is a
-typical cause of
+<ul class="simple">
+<li><p>The data collection process led to an important imbalance
+between the number of male/female samples. Thus, our data are <strong>not representative</strong> of the US population.</p></li>
+<li><p>Training a model with such data imbalance can cause
+disproportioned prediction errors for the under-represented groups.</p></li>
+<li><p>This is a typical cause of
 <a class="reference external" href="https://docs.microsoft.com/en-us/azure/machine-learning/concept-fairness-ml#what-is-machine-learning-fairness">fairness</a>
 problems if used naively when deploying a machine learning based system in a
-real life setting.</p>
-<p>We recommend our readers to refer to <a class="reference external" href="https://fairlearn.org">fairlearn.org</a>
-for resources on how to quantify and potentially mitigate fairness issues
-related to the deployment of automated decision making systems that rely on
-machine learning components.</p>
-<p>Studying why the data collection process of this dataset lead to such an
-unexpected gender imbalance is beyond the scope of this MOOC but we should
-keep in mind that this dataset is not representative of the US population
-before drawing any conclusions based on its statistics or the predictions of
-models trained on it.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult_census</span><span class="p">[</span><span class="s2">&quot;education&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>education
-HS-grad         15784
-Some-college    10878
-Bachelors        8025
-Masters          2657
-Assoc-voc        2061
-11th             1812
-Assoc-acdm       1601
-10th             1389
-7th-8th           955
-Prof-school       834
-9th               756
-12th              657
-Doctorate         594
-5th-6th           509
-1st-4th           247
-Preschool          83
-Name: count, dtype: int64
-</pre></div>
-</div>
-</div>
-</div>
-<p>As noted above, <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> distribution has two clear peaks around 10
-and 13. It would be reasonable to expect that <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> is the number
-of years of education.</p>
-<p>Let’s look at the relationship between <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code>.</p>
+real life setting.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="inspecting-relationships-between-columns">
+<h2>Inspecting relationships between columns<a class="headerlink" href="#inspecting-relationships-between-columns" title="Link to this heading">#</a></h2>
+<section id="in-pandas">
+<h3>In pandas<a class="headerlink" href="#in-pandas" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>We can use the crosstabulation feature from pandas to see how two variables are related</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span>
@@ -1295,20 +1285,28 @@ of years of education.</p>
 </table>
 </div></div></div>
 </div>
-<p>For every entry in <code class="docutils literal notranslate"><span class="pre">\&quot;education\&quot;</span></code>, there is only one single corresponding
-value in <code class="docutils literal notranslate"><span class="pre">\&quot;education-num\&quot;</span></code>. This shows that <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> give you the same information. For example,
-<code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;=2</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;=&quot;1st-4th&quot;</span></code>. In practice that
-means we can remove <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> without losing information. Note that
-having redundant (or highly correlated) columns can be a problem for machine
-learning algorithms.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the upcoming notebooks, we will only keep the <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;</span></code> variable,
-excluding the <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> variable since the latter is redundant with
-the former.</p>
+<p><strong>Redundant columns</strong></p>
+<ul class="simple">
+<li><p>For every entry in <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;</span></code>, there is only one single corresponding
+value in <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code>.</p></li>
+<li><p>This shows that <code class="docutils literal notranslate"><span class="pre">&quot;education&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> give you the same information.</p></li>
+<li><p>Thus, we can remove <code class="docutils literal notranslate"><span class="pre">&quot;education-num&quot;</span></code> without losing information.</p></li>
+<li><p>Note that having redundant (or highly correlated) columns can be a problem for machine
+learning algorithms.</p></li>
+</ul>
+<p>We drop this column now and in all future notebooks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adult_census</span> <span class="o">=</span> <span class="n">adult_census</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;education&quot;</span><span class="p">]</span>
+<span class="p">)</span>  <span class="c1"># duplicated in categorical column</span>
+</pre></div>
 </div>
-<p>Another way to inspect the data is to do a <code class="docutils literal notranslate"><span class="pre">pairplot</span></code> and show how each
+</div>
+</div>
+<section id="using-pairplot">
+<h4>Using pairplot<a class="headerlink" href="#using-pairplot" title="Link to this heading">#</a></h4>
+<p>Another way to inspect the relationship between variables is to do a <code class="docutils literal notranslate"><span class="pre">pairplot</span></code> and show how each
 variable differs according to our target, i.e. <code class="docutils literal notranslate"><span class="pre">&quot;class&quot;</span></code>. Plots along the
 diagonal show the distribution of individual variables for each <code class="docutils literal notranslate"><span class="pre">&quot;class&quot;</span></code>. The
 plots on the off-diagonal can reveal interesting interactions between
@@ -1338,93 +1336,12 @@ variables.</p>
 </div>
 </div>
 </section>
-<section id="creating-decision-rules-by-hand">
-<h2>Creating decision rules by hand<a class="headerlink" href="#creating-decision-rules-by-hand" title="Link to this heading">#</a></h2>
-<p>By looking at the previous plots, we could create some hand-written rules that
-predict whether someone has a high- or low-income. For instance, we could
-focus on the combination of the <code class="docutils literal notranslate"><span class="pre">&quot;hours-per-week&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;age&quot;</span></code> features.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;hours-per-week&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">adult_census</span><span class="p">[:</span><span class="n">n_samples_to_plot</span><span class="p">],</span>
-    <span class="n">hue</span><span class="o">=</span><span class="n">target_column</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/f15aeaed84e62b84df15204c606c8fd11ba78eb8ae9f8548d69ca2861e6bce02.png" src="../_images/f15aeaed84e62b84df15204c606c8fd11ba78eb8ae9f8548d69ca2861e6bce02.png" />
-</div>
-</div>
-<p>The data points (circles) show the distribution of <code class="docutils literal notranslate"><span class="pre">&quot;hours-per-week&quot;</span></code> and
-<code class="docutils literal notranslate"><span class="pre">&quot;age&quot;</span></code> in the dataset. Blue points mean low-income and orange points mean
-high-income. This part of the plot is the same as the bottom-left plot in the
-pairplot above.</p>
-<p>In this plot, we can try to find regions that mainly contains a single class
-such that we can easily decide what class one should predict. We could come up
-with hand-written rules as shown in this plot:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span>
-    <span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span>
-    <span class="n">y</span><span class="o">=</span><span class="s2">&quot;hours-per-week&quot;</span><span class="p">,</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">adult_census</span><span class="p">[:</span><span class="n">n_samples_to_plot</span><span class="p">],</span>
-    <span class="n">hue</span><span class="o">=</span><span class="n">target_column</span><span class="p">,</span>
-    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">age_limit</span> <span class="o">=</span> <span class="mi">27</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">age_limit</span><span class="p">,</span> <span class="n">ymin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ymax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
-
-<span class="n">hours_per_week_limit</span> <span class="o">=</span> <span class="mi">40</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span>
-    <span class="n">y</span><span class="o">=</span><span class="n">hours_per_week_limit</span><span class="p">,</span> <span class="n">xmin</span><span class="o">=</span><span class="mf">0.18</span><span class="p">,</span> <span class="n">xmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;--&quot;</span>
-<span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&lt;=50K&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">25</span><span class="p">),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;&lt;=50K&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s2">&quot;???&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/99676e8f49889704f5f37c460eb96f8ffa4b813a4570ff4487570fc38098368b.png" src="../_images/99676e8f49889704f5f37c460eb96f8ffa4b813a4570ff4487570fc38098368b.png" />
-</div>
-</div>
-<ul class="simple">
-<li><p>In the region <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&lt;</span> <span class="pre">27</span></code> (left region) the prediction is low-income. Indeed,
-there are many blue points and we cannot see any orange points.</p></li>
-<li><p>In the region <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;</span> <span class="pre">27</span> <span class="pre">AND</span> <span class="pre">hours-per-week</span> <span class="pre">&lt;</span> <span class="pre">40</span></code> (bottom-right region), the
-prediction is low-income. Indeed, there are many blue points and only a few
-orange points.</p></li>
-<li><p>In the region <code class="docutils literal notranslate"><span class="pre">age</span> <span class="pre">&gt;</span> <span class="pre">27</span> <span class="pre">AND</span> <span class="pre">hours-per-week</span> <span class="pre">&gt;</span> <span class="pre">40</span></code> (top-right region), we see
-a mix of blue points and orange points. It seems complicated to choose which
-class we should predict in this region.</p></li>
-</ul>
-<p>It is interesting to note that some machine learning models work similarly to
-what we did: they are known as decision tree models. The two thresholds that
-we chose (27 years and 40 hours) are somewhat arbitrary, i.e. we chose them by
-only looking at the pairplot. In contrast, a decision tree chooses the “best”
-splits based on data without human intervention or inspection. Decision trees
-will be covered more in detail in a future module.</p>
-<p>Note that machine learning is often used when creating rules by hand is not
-straightforward. For example because we are in high dimension (many features
-in a table) or because there are no simple and obvious rules that separate the
-two classes as in the top-right region of the previous plot.</p>
-<p>To sum up, the important thing to remember is that in a machine-learning
-setting, a model automatically creates the “rules” from the existing data in
-order to make predictions on new unseen data.</p>
+</section>
 </section>
 <section id="notebook-recap">
 <h2>Notebook Recap<a class="headerlink" href="#notebook-recap" title="Link to this heading">#</a></h2>
 <p>In this notebook we:</p>
 <ul class="simple">
-<li><p>loaded the data from a CSV file using <code class="docutils literal notranslate"><span class="pre">pandas</span></code>;</p></li>
 <li><p>looked at the different kind of variables to differentiate between
 categorical and numerical variables;</p></li>
 <li><p>inspected the data with <code class="docutils literal notranslate"><span class="pre">pandas</span></code> and <code class="docutils literal notranslate"><span class="pre">seaborn</span></code>. Data inspection can allow
@@ -1438,9 +1355,20 @@ target category than another), you may need special techniques for training
 and evaluating your machine learning model;</p></li>
 <li><p>having redundant (or highly correlated) columns can be a problem for some
 machine learning algorithms;</p></li>
-<li><p>contrary to decision tree, linear models can only capture linear
-interactions, so be aware of non-linear relationships in your data.</p></li>
 </ul>
+<section id="sources">
+<h3>Sources<a class="headerlink" href="#sources" title="Link to this heading">#</a></h3>
+<p><strong>Data</strong></p>
+<p>We use data from the 1994 US census that we downloaded from
+<a class="reference external" href="http://openml.org/">OpenML</a>.</p>
+<p>You can look at the OpenML webpage to learn more about this dataset:
+<a class="reference external" href="http://www.openml.org/d/1590">http://www.openml.org/d/1590</a></p>
+<p><strong>Fairness in ML</strong></p>
+<p>We recommend our readers to refer to <a class="reference external" href="https://fairlearn.org">fairlearn.org</a>
+for resources on how to quantify and potentially mitigate fairness issues
+related to the deployment of automated decision making systems that rely on
+machine learning components.</p>
+</section>
 </section>
 </section>
 
@@ -1509,10 +1437,25 @@ interactions, so be aware of non-linear relationships in your data.</p></li>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-the-adult-census-dataset">Loading the adult census dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-variables-columns-in-the-dataset">The variables (columns) in the dataset</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-inspection-of-the-data">Visual inspection of the data</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-decision-rules-by-hand">Creating decision rules by hand</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-recap">Notebook Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-the-data-individual-columns">Inspecting the data: individual columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visually-inspecting-numerical-columns">Visually inspecting numerical columns</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-categorical-columns">Inspecting categorical columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#class-imbalance">Class imbalance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inspecting-relationships-between-columns">Inspecting relationships between columns</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-pandas">In pandas</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pairplot">Using pairplot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#notebook-recap">Notebook Recap</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sources">Sources</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 

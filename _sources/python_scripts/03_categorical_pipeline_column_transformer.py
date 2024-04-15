@@ -205,66 +205,9 @@ print(
 # used numerical and categorical variables in isolation.
 
 # %% [markdown]
-# ## Fitting a more powerful model
-#
-# **Linear models** are nice because they are usually cheap to train, **small**
-# to deploy, **fast** to predict and give a **good baseline**.
-#
-# However, it is often useful to check whether more complex models such as an
-# ensemble of decision trees can lead to higher predictive performance. In this
-# section we use such a model called **gradient-boosting trees** and evaluate
-# its generalization performance. More precisely, the scikit-learn model we use
-# is called `HistGradientBoostingClassifier`. Note that boosting models will be
-# covered in more detail in a future module.
-#
-# For tree-based models, the handling of numerical and categorical variables is
-# simpler than for linear models:
-# * we do **not need to scale the numerical features**
-# * using an **ordinal encoding for the categorical variables** is fine even if
-#   the encoding results in an arbitrary ordering
-#
-# Therefore, for `HistGradientBoostingClassifier`, the preprocessing pipeline is
-# slightly simpler than the one we saw earlier for the `LogisticRegression`:
-
-# %%
-from sklearn.ensemble import HistGradientBoostingClassifier
-from sklearn.preprocessing import OrdinalEncoder
-
-categorical_preprocessor = OrdinalEncoder(
-    handle_unknown="use_encoded_value", unknown_value=-1
-)
-
-preprocessor = ColumnTransformer(
-    [("categorical", categorical_preprocessor, categorical_columns)],
-    remainder="passthrough",
-)
-
-model = make_pipeline(preprocessor, HistGradientBoostingClassifier())
-
-# %% [markdown]
-# Now that we created our model, we can check its generalization performance.
-
-# %%
-# %%time
-_ = model.fit(data_train, target_train)
-
-# %%
-model.score(data_test, target_test)
-
-# %% [markdown]
-# We can observe that we get significantly higher accuracies with the Gradient
-# Boosting model. This is often what we observe whenever the dataset has a large
-# number of samples and limited number of informative features (e.g. less than
-# 1000) with a mix of numerical and categorical variables.
-#
-# This explains why Gradient Boosted Machines are very popular among datascience
-# practitioners who work with tabular data.
-
-# %% [markdown]
 # In this notebook we:
 #
 # * used a `ColumnTransformer` to apply different preprocessing for categorical
 #   and numerical variables;
 # * used a pipeline to chain the `ColumnTransformer` preprocessing and logistic
-#   regression fitting;
-# * saw that **gradient boosting methods** can outperform **linear models**.
+#   regression fitting.

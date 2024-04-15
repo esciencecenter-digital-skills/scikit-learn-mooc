@@ -234,8 +234,6 @@
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Combining categorical and numerical data</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../predictive_modeling_pipeline/04_combining_mixed_data_index.html">Combining categorical and numerical data</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-6"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_ex_02.html">📝 Exercise M1.05</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_sol_02.html">📃 Solution for Exercise M1.05</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_visualization_video.html">🎥 Visualizing scikit-learn pipelines in Jupyter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="03_categorical_pipeline_visualization.html">Visualizing scikit-learn pipelines in Jupyter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03.html">✅ Quiz M1.03</a></li>
@@ -519,7 +517,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-based-on-data-types">Selection based on data types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-columns-to-a-specific-processor">Dispatch columns to a specific processor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-the-model-with-cross-validation">Evaluation of the model with cross-validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-more-powerful-model">Fitting a more powerful model</a></li>
 </ul>
             </nav>
         </div>
@@ -1312,8 +1309,8 @@ scikit-learn as any other predictors:</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;fit_time&#39;: array([0.25602913, 0.25905132, 0.23243451, 0.2503531 , 0.273103  ]),
- &#39;score_time&#39;: array([0.02798557, 0.02915168, 0.0279448 , 0.02994943, 0.02823448]),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;fit_time&#39;: array([0.25417137, 0.25640798, 0.23525095, 0.247998  , 0.26046634]),
+ &#39;score_time&#39;: array([0.02815008, 0.0275538 , 0.03029609, 0.02835393, 0.02757764]),
  &#39;test_score&#39;: array([0.85116184, 0.84993346, 0.8482801 , 0.85257985, 0.85544636])}
 </pre></div>
 </div>
@@ -1337,85 +1334,12 @@ scikit-learn as any other predictors:</p>
 </div>
 <p>The compound model has a higher predictive accuracy than the two models that
 used numerical and categorical variables in isolation.</p>
-</section>
-<section id="fitting-a-more-powerful-model">
-<h2>Fitting a more powerful model<a class="headerlink" href="#fitting-a-more-powerful-model" title="Link to this heading">#</a></h2>
-<p><strong>Linear models</strong> are nice because they are usually cheap to train, <strong>small</strong>
-to deploy, <strong>fast</strong> to predict and give a <strong>good baseline</strong>.</p>
-<p>However, it is often useful to check whether more complex models such as an
-ensemble of decision trees can lead to higher predictive performance. In this
-section we use such a model called <strong>gradient-boosting trees</strong> and evaluate
-its generalization performance. More precisely, the scikit-learn model we use
-is called <code class="docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code>. Note that boosting models will be
-covered in more detail in a future module.</p>
-<p>For tree-based models, the handling of numerical and categorical variables is
-simpler than for linear models:</p>
-<ul class="simple">
-<li><p>we do <strong>not need to scale the numerical features</strong></p></li>
-<li><p>using an <strong>ordinal encoding for the categorical variables</strong> is fine even if
-the encoding results in an arbitrary ordering</p></li>
-</ul>
-<p>Therefore, for <code class="docutils literal notranslate"><span class="pre">HistGradientBoostingClassifier</span></code>, the preprocessing pipeline is
-slightly simpler than the one we saw earlier for the <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>:</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">HistGradientBoostingClassifier</span>
-<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">OrdinalEncoder</span>
-
-<span class="n">categorical_preprocessor</span> <span class="o">=</span> <span class="n">OrdinalEncoder</span><span class="p">(</span>
-    <span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;use_encoded_value&quot;</span><span class="p">,</span> <span class="n">unknown_value</span><span class="o">=-</span><span class="mi">1</span>
-<span class="p">)</span>
-
-<span class="n">preprocessor</span> <span class="o">=</span> <span class="n">ColumnTransformer</span><span class="p">(</span>
-    <span class="p">[(</span><span class="s2">&quot;categorical&quot;</span><span class="p">,</span> <span class="n">categorical_preprocessor</span><span class="p">,</span> <span class="n">categorical_columns</span><span class="p">)],</span>
-    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;passthrough&quot;</span><span class="p">,</span>
-<span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">preprocessor</span><span class="p">,</span> <span class="n">HistGradientBoostingClassifier</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>Now that we created our model, we can check its generalization performance.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data_train</span><span class="p">,</span> <span class="n">target_train</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 688 ms, sys: 7.75 ms, total: 695 ms
-Wall time: 695 ms
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">data_test</span><span class="p">,</span> <span class="n">target_test</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.8793710588813365
-</pre></div>
-</div>
-</div>
-</div>
-<p>We can observe that we get significantly higher accuracies with the Gradient
-Boosting model. This is often what we observe whenever the dataset has a large
-number of samples and limited number of informative features (e.g. less than
-1000) with a mix of numerical and categorical variables.</p>
-<p>This explains why Gradient Boosted Machines are very popular among datascience
-practitioners who work with tabular data.</p>
 <p>In this notebook we:</p>
 <ul class="simple">
 <li><p>used a <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> to apply different preprocessing for categorical
 and numerical variables;</p></li>
 <li><p>used a pipeline to chain the <code class="docutils literal notranslate"><span class="pre">ColumnTransformer</span></code> preprocessing and logistic
-regression fitting;</p></li>
-<li><p>saw that <strong>gradient boosting methods</strong> can outperform <strong>linear models</strong>.</p></li>
+regression fitting.</p></li>
 </ul>
 </section>
 </section>
@@ -1487,7 +1411,6 @@ regression fitting;</p></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#selection-based-on-data-types">Selection based on data types</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dispatch-columns-to-a-specific-processor">Dispatch columns to a specific processor</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluation-of-the-model-with-cross-validation">Evaluation of the model with cross-validation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-a-more-powerful-model">Fitting a more powerful model</a></li>
 </ul>
   </nav></div>
 

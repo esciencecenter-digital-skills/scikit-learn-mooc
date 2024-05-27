@@ -44,7 +44,7 @@ target = blood_transfusion["Class"]
 # linear model are different but we don't need to know these details for the
 # exercise.
 #
-# Also, this classifier can become more flexible/expressive by using a so-called
+# Also, this classifier can become more flexible and more expressive by using a so-called
 # kernel that makes the model become non-linear. Again, no undestanding regarding
 # the mathematics is required to accomplish this exercise.
 #

@@ -19,9 +19,6 @@ the train error with the test error** for various choice of the model family,
 model parameters. More importantly, we will emphasize the **impact of the size
 of the training set on this trade-off**.
 
-Finally we will relate overfitting and underfitting to the concepts of
-statistical variance and bias.
-
 ## Before getting started
 
 <!-- Give the required skills for the module -->
@@ -41,8 +38,7 @@ The objective in the module are the following:
 
 - understand the concept of overfitting and underfitting;
 - understand the concept of generalization;
-- understand the general cross-validation framework used to evaluate a model.
 
 <!-- Give the investment in time -->
 
-The estimated time to go through this module is about 3 hours.
+The estimated time to go through this module is about 30 minutes.

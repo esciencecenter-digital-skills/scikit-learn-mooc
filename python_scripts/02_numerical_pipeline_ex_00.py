@@ -46,7 +46,7 @@ from sklearn.neighbors import KNeighborsClassifier
 # Write your code here.
 
 # %% [markdown]
-# Fit this model on the train data and target that we used before
+# Fit this model on the training data and target that we used before
 
 # %%
 # Write your code here.

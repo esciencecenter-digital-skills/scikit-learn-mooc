@@ -1,5 +1,0 @@
-# Overfitting and underfitting
-
-```{tableofcontents}
-
-```

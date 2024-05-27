@@ -60,14 +60,11 @@ parts:
 - caption: Selecting the best model
   chapters:
   - file: overfit/overfit_module_intro
-  - file: overfit/overfit_overfitting_underfitting_index
-    sections:
-    - file: overfit/overfitting_vs_under_fitting_slides
-  - file: overfit/overfit_validation_learning_curves_index
-    sections:
-    - file: overfit/learning_validation_curves_slides
-    - file: python_scripts/cross_validation_validation_curve
-    - file: python_scripts/cross_validation_learning_curve
+  - file: overfit/overfitting_vs_under_fitting_slides
+  - file: overfit/overfitting_vs_under_fitting_quiz_m2_01.md
+  - file: overfit/learning_validation_curves_slides
+  - file: python_scripts/cross_validation_ex_01.py
+  - file: python_scripts/cross_validation_sol_01.py
 - caption: Concluding remarks
   chapters:
   - file: concluding_remarks_video.md

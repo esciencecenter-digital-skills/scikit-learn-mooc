@@ -193,6 +193,11 @@ data_train_scaled.describe()
 # distributions and a scatterplot of any pair of numerical features at the same
 # time. We can observe that `StandardScaler` does not change the structure of
 # the data itself but the axes get shifted and scaled.
+#
+# *Note to instructor*: We strongly advise to copy-paste below code and discuss the visualization with your audience.
+# We discourage using live-coding here, because you will spend a lot of time fiddling with the jointplot, time which
+# we can better use to introduce machine learning.
+#
 
 # %%
 import matplotlib.pyplot as plt
@@ -251,9 +256,7 @@ model.named_steps
 # `score`).
 
 # %%
-start = time.time()
 model.fit(data_train, target_train)
-elapsed_time = time.time() - start
 
 # %% [markdown]
 # We can represent the internal mechanism of a pipeline when calling `fit` by
@@ -287,7 +290,7 @@ predicted_target[:5]
 # `predict`.
 #
 # As a shorthand, we can check the score of the full predictive pipeline calling
-# the method `model.score`. Thus, let's check the computational and
+# the method `model.score`. Thus, let's check the
 # generalization performance of such a predictive pipeline.
 
 # %%
@@ -295,35 +298,25 @@ model_name = model.__class__.__name__
 score = model.score(data_test, target_test)
 print(
     f"The accuracy using a {model_name} is {score:.3f} "
-    f"with a fitting time of {elapsed_time:.3f} seconds "
-    f"in {model[-1].n_iter_[0]} iterations"
 )
 
 # %% [markdown]
-# We could compare this predictive model with the predictive model used in the
-# previous notebook which did not scale features.
-
-# %%
-model = LogisticRegression()
-start = time.time()
-model.fit(data_train, target_train)
-elapsed_time = time.time() - start
-
-# %%
-model_name = model.__class__.__name__
-score = model.score(data_test, target_test)
-print(
-    f"The accuracy using a {model_name} is {score:.3f} "
-    f"with a fitting time of {elapsed_time:.3f} seconds "
-    f"in {model.n_iter_[0]} iterations"
-)
-
-# %% [markdown]
+# We can compare the pipeline using scaling and logistic regression with
+# using a logistic regression model without scaling like we did before.
+# We will not go into how to do this comparison with Python in sake of time,
+# instead we directly give you the results:
+#
+# The accuracy using a Pipeline is 0.807 with a fitting time of
+# 0.043 seconds in 9 iterations
+# The accuracy using a LogisticRegression is 0.807 with a fitting time of
+# 0.110 seconds in 60 iterations
+#
 # We see that scaling the data before training the logistic regression was
 # beneficial in terms of computational performance. Indeed, the number of
 # iterations decreased as well as the training time. The generalization
 # performance did not change since both models converged.
-#
+
+# %% [markdown]
 # ```{warning}
 # Working with non-scaled data will potentially force the algorithm to iterate
 # more as we showed in the example above. There is also the catastrophic

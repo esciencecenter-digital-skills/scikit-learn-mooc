@@ -185,16 +185,12 @@ print(
 # linear models family.
 #
 # ```{note}
-# In short, linear models find a set of weights to combine features linearly
+# To recap, linear models find a set of weights to combine features linearly
 # and predict the target. For instance, the model can come up with a rule such
 # as:
 # * if `0.1 * age + 3.3 * hours-per-week - 15.1 > 0`, predict `high-income`
 # * otherwise predict `low-income`
 #
-# Linear models, and in particular the logistic regression, will be covered
-# more in detail in the "Linear models" module later in this course. For now the
-# focus is to use this logistic regression model in scikit-learn rather than
-# understand how it works in details.
 # ```
 #
 # To create a logistic regression model in scikit-learn you can do:

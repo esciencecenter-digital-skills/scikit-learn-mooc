@@ -103,6 +103,8 @@ Here you see an example of how to train a relatively complex neural network on t
 Typically, you do not know which model 'family' works best on your data.
 It can help to do a quick 'model sweep': try out a few models to see which works best.
 
+Note that applying various models with arbitrary parameters can also yield misleading results, especially in case novices that do not understand the underlying algorithms. But trying out a few models with default parameters (which are default for a reason) can quickly give you an idea of what could work well.
+
 ---
 
 # Hyperparameter tuning

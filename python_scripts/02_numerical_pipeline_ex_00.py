@@ -17,18 +17,7 @@
 # The goal of this exercise is to fit a similar model as in the previous
 # notebook to get familiar with manipulating scikit-learn objects and in
 # particular the `.fit/.predict/.score` API.
-
-# %% [markdown]
-# Let's load the adult census dataset with only numerical variables
-
-# %%
-import pandas as pd
-
-adult_census = pd.read_csv("../datasets/adult-census-numeric.csv")
-data = adult_census.drop(columns="class")
-target = adult_census["class"]
-
-# %% [markdown]
+#
 # In the previous notebook we used `model = KNeighborsClassifier()`. All
 # scikit-learn models can be created without arguments. This is convenient
 # because it means that you don't need to understand the full details of a model
@@ -57,7 +46,7 @@ from sklearn.neighbors import KNeighborsClassifier
 # Write your code here.
 
 # %% [markdown]
-# Fit this model on the data and target loaded above
+# Fit this model on the train data and target that we used before
 
 # %%
 # Write your code here.

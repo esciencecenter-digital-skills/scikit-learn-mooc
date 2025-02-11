@@ -83,21 +83,7 @@ python3 -m pip install matplotlib jupyter seaborn scikit-learn pandas
 py -m pip install matplotlib jupyter seaborn scikit-learn pandas
 ```
 
-## Creating a Jupyter Notebook Kernel 
 
-Run the following command in the terminal to create a kernel for the virtual environment:
-
-### On Linux/macOs
-
-```shell
-python3 -m ipykernel install --user --name=ml_workshop
-```
-
-### On Windows
-
-```shell
-py -m ipykernel install --user --name=ml_workshop
-```
 
 ## Starting Jupyter Lab
 
@@ -110,8 +96,6 @@ To start Jupyter Lab, open a terminal (Mac/Linux) or Command Prompt (Windows) an
 ```shell
 jupyter lab
 ```
-
-When creating a new notebook, select the kernel of the virtual environment.
 
 ### Download datasets
 Download and extract [this datasets.zip file](https://zenodo.org/records/14851649/files/datasets.zip)

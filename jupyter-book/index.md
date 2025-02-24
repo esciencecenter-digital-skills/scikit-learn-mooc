@@ -9,22 +9,14 @@ The goal of this course is to teach machine learning with scikit-learn to
 beginners, even without a strong technical background.
 ```
 
-Predictive modeling brings value to a vast variety of data, in business
-intelligence, health, industrial processes and scientific discoveries. It is a
-pillar of modern data science. In this field, scikit-learn is a central tool:
-it is easily accessible, yet powerful, and naturally dovetails in the wider
-ecosystem of data-science tools based on the Python programming language.
+This hands-on workshop will provide you with the basics of machine learning using Python.
 
-This course is an in-depth introduction to predictive modeling with
-scikit-learn. Step-by-step and didactic lessons introduce the fundamental
-methodological and software tools of machine learning, and is as such a
-stepping stone to more advanced challenges in artificial intelligence, text
-mining, or data science.
+Machine learning is the field devoted to methods and algorithms that 'learn' from data. It can be applied to a vast range of different domains, from linguistics to physics and from medical imaging to history.
 
-The course is more than a cookbook: it will teach you to be critical about each
-step of the design of a predictive modeling pipeline: from choices in data
-preprocessing, to choosing models, gaining insights on their failure modes and
-interpreting their predictions.
+This workshop covers the basics of machine learning in a practical and hands-on manner, so that upon completion, you will be able to train your first machine learning models and understand what next steps to take to improve them.
+
+We start with data exploration and prepare the data so that it is suitable for machine learning. Then we learn how to train a model on the data using scikit-learn. We learn how to select the best model from the trained models and how to use different machine learning models (like linear regression, logistic regression, and decision tree models). Finally, we discuss some of the best practices when starting your own machine learning project.
+
 
 ## Setup instructions
 

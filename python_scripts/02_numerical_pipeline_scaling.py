@@ -296,9 +296,7 @@ predicted_target[:5]
 # %%
 model_name = model.__class__.__name__
 score = model.score(data_test, target_test)
-print(
-    f"The accuracy using a {model_name} is {score:.3f} "
-)
+print(f"The accuracy using a {model_name} is {score:.3f} ")
 
 # %% [markdown]
 # We can compare the pipeline using scaling and logistic regression with

@@ -506,6 +506,11 @@ document.write(`
 </li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-jupyter-notebook-kernel">Creating a Jupyter Notebook Kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">On Linux/macOs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">On Windows</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-lab">Starting Jupyter Lab</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#download-datasets">Download datasets</a></li>
 </ul>
@@ -603,6 +608,22 @@ and run the following commands.</p>
 </section>
 </section>
 </section>
+<section id="creating-a-jupyter-notebook-kernel">
+<h2>Creating a Jupyter Notebook Kernel<a class="headerlink" href="#creating-a-jupyter-notebook-kernel" title="Link to this heading">#</a></h2>
+<p>Run the following command in the terminal to create a kernel for the virtual environment:</p>
+<section id="id5">
+<h3>On Linux/macOs<a class="headerlink" href="#id5" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>python3<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>ml_workshop
+</pre></div>
+</div>
+</section>
+<section id="id6">
+<h3>On Windows<a class="headerlink" href="#id6" title="Link to this heading">#</a></h3>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>ml_workshop
+</pre></div>
+</div>
+</section>
+</section>
 <section id="starting-jupyter-lab">
 <h2>Starting Jupyter Lab<a class="headerlink" href="#starting-jupyter-lab" title="Link to this heading">#</a></h2>
 <blockquote>
@@ -614,6 +635,7 @@ See the <a class="reference external" href="https://jupyterlab.readthedocs.io/en
 <div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>jupyter<span class="w"> </span>lab
 </pre></div>
 </div>
+<p>When creating a new notebook, select the kernel of the virtual environment.</p>
 <section id="download-datasets">
 <h3>Download datasets<a class="headerlink" href="#download-datasets" title="Link to this heading">#</a></h3>
 <p>Download and extract <a class="reference external" href="https://zenodo.org/records/14851649/files/datasets.zip">this datasets.zip file</a>
@@ -739,6 +761,11 @@ service.</p>
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">On Windows</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-a-jupyter-notebook-kernel">Creating a Jupyter Notebook Kernel</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">On Linux/macOs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">On Windows</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starting-jupyter-lab">Starting Jupyter Lab</a><ul class="nav section-nav flex-column">

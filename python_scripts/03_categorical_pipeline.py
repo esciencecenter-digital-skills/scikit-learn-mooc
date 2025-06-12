@@ -32,11 +32,10 @@ data = adult_census.drop(columns=[target_name])
 #
 # ## Identify categorical variables
 #
-# As we saw in the previous section, a numerical variable is a
-# quantity represented by a real or integer number. These variables can be
-# naturally handled by machine learning algorithms that are typically composed
-# of a sequence of arithmetic instructions such as additions and
-# multiplications.
+# As we saw in the previous section, a numerical variable is a quantity
+# represented by a continous or integer number. These variables can be naturally
+# handled by machine learning algorithms that are typically composed of a
+# sequence of arithmetic instructions such as additions and multiplications.
 #
 # In contrast, categorical variables have discrete values, typically
 # represented by string labels (but not only) taken from a finite list of
@@ -81,7 +80,7 @@ categorical_columns
 
 # %%
 data_categorical = data[categorical_columns]
-data_categorical.head()
+data_categorical
 
 # %%
 print(f"The dataset is composed of {data_categorical.shape[1]} features")
@@ -194,7 +193,7 @@ education_encoded
 
 # %%
 print(f"The dataset is composed of {data_categorical.shape[1]} features")
-data_categorical.head()
+data_categorical
 
 # %%
 data_encoded = encoder.fit_transform(data_categorical)
@@ -253,7 +252,7 @@ print(f"The encoded dataset contains {data_encoded.shape[1]} features")
 # and check the generalization performance of this machine learning pipeline using
 # cross-validation.
 #
-# Before we create the pipeline, we have to linger on the `native-country`.
+# Before we create the pipeline, we have to focus on the `native-country`.
 # Let's recall some statistics regarding this column.
 
 # %%
@@ -329,9 +328,10 @@ scores = cv_results["test_score"]
 print(f"The accuracy is: {scores.mean():.3f} ± {scores.std():.3f}")
 
 # %% [markdown]
-# As you can see, this representation of the categorical variables is
-# slightly more predictive of the revenue than the numerical variables
-# that we used previously.
+# As you can see, this representation of the categorical variables is slightly
+# more predictive of the revenue than the numerical variables that we used
+# previously. The reason being that we have more (predictive) categorical
+# features than numerical ones.
 
 # %% [markdown]
 #

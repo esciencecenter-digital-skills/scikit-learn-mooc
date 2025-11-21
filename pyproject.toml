@@ -1,3 +1,38 @@
+[build-system]
+requires = ["setuptools>=64.0.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scikit-learn-course"
+version = "0.0.1"
+requires-python = ">=3.8"
+dependencies = [
+    "pandas >= 1",
+    "scikit-learn>=1.6",
+    "pandas >= 1",
+    "matplotlib",
+    "seaborn >= 0.13",
+    "plotly >= 5.10",
+    "notebook",
+]
+
+[project.optional-dependencies]
+dev = [
+    "sphinx-book-theme",
+    "jupytext",
+    "beautifulsoup4",
+    "IPython",
+    "black",
+    "pre-commit",
+    "ruff",
+    "jupyter-book>1.0, <2",
+    "myst_parser",
+]
+
+[tool.setuptools]
+py-modules = []
+
+
 [tool.black]
 line-length = 79
 target_version = ['py38', 'py39', 'py310', 'py311']

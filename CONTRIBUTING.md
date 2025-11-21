@@ -4,8 +4,17 @@ The source files, which should be modified, are in the `python_scripts`
 directory. The notebooks are generated from these Python files with
 [Jupytext](https://jupytext.readthedocs.io/).
 
-If you are planning to contribute to this repo you should set-up your
-environment using the `environment-dev.yml` or `requirements-dev.txt` file.
+## Set up development environment
+
+```sh
+git clone https://github.com/esciencecenter-digital-skills/scikit-learn-mooc
+cd scikit-learn-mooc
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .[dev]
+pre-commit install
+```
+
 
 ## Recommended workflow : Visual Studio Code
 
@@ -121,6 +130,18 @@ cd jupyter-book/_build/html/index.html && python -m http.server
 ```
 
 and then open a browser at `localhost:8000`.
+
+## Run Jupyter notebooks locally
+
+After building the notebooks, you can run them:
+
+```sh
+source .venv/bin/activate
+jupyter notebook full-index.ipynb
+```
+
+`full-index.ipynb` is an index file helping to navigate the notebooks.
+All the Jupyter notebooks are located in the `notebooks` folder.
 
 ## Troubleshooting sphinx failures
 

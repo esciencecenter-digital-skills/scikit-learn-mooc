@@ -3,8 +3,8 @@
 ## Github repo
 
 Most of the public MOOC content is in the github repo:
-https://github.com/INRIA/scikit-learn-mooc. The rendered version of the
-`main` branch is at: https://inria.github.io/scikit-learn-mooc.
+https://github.com/esciencecenter-digital-skills/scikit-learn-mooc. The rendered version of the
+`main` branch is at: https://esciencecenter-digital-skills.github.io/scikit-learn-mooc/.
 
 Note that some files in this repo are derived files, meaning you are not
 supposed to edit them directly but to generate them.

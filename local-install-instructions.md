@@ -17,7 +17,7 @@ scikit-learn, and matplotlib.
 
 ```sh
 # Clone this repo
-git clone https://github.com/INRIA/scikit-learn-mooc
+git clone https://github.com/esciencecenter-digital-skills/scikit-learn-mooc
 cd scikit-learn-mooc
 # Create a conda environment with the required packages for this tutorial:
 conda env create -f environment.yml

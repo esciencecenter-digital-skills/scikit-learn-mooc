@@ -1,8 +1,0 @@
-scikit-learn>=1.6
-pandas >= 1
-matplotlib>=3.10
-seaborn >= 0.13
-plotly
-jupyterlab
-notebook
-IPython

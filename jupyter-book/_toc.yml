@@ -28,12 +28,12 @@ parts:
       - file: python_scripts/02_numerical_pipeline_sol_01
       # Categorical
       #- file: python_scripts/0X_preprocessing_categorical
-      - file: python_scripts/03_categorical_pipeline
+      - file: python_scripts/0X_preprocessing_categorical
       - file: python_scripts/03_categorical_pipeline_ex_01
       - file: python_scripts/03_categorical_pipeline_sol_01
       # Combine
-      #- file: python_scripts/0X_preprocessing_combine
-      - file: python_scripts/03_categorical_pipeline_column_transformer
+      - file: python_scripts/0X_preprocessing_combine
+      #- file: python_scripts/03_categorical_pipeline_column_transformer
     #- file: linear_models/linear_models_slides
     #- file: python_scripts/02_numerical_pipeline_hands_on
     #- file: python_scripts/02_numerical_pipeline_ex_01

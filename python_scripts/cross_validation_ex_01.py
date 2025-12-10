@@ -22,7 +22,7 @@
 # * use a learning curve to determine the usefulness of adding new samples in
 #   the dataset when building a classifier.
 #
-# To make these experiments we first load the blood transfusion dataset.
+# To make these experiments we first load the adult census dataset.
 
 # %% [markdown]
 # ```{note}
@@ -33,9 +33,12 @@
 # %%
 import pandas as pd
 
-blood_transfusion = pd.read_csv("../datasets/blood_transfusion.csv")
-data = blood_transfusion.drop(columns="Class")
-target = blood_transfusion["Class"]
+adult_census = pd.read_csv("../datasets/adult-census.csv")
+target_name = "class"
+numerical_columns = ["age", "capital-gain", "capital-loss", "hours-per-week"]
+
+target = adult_census[target_name]
+data = adult_census[numerical_columns]
 
 # %% [markdown]
 # Here we use a support vector machine classifier (SVM). In its most simple

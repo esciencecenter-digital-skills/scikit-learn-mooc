@@ -1,5 +1,0 @@
-# Manual tuning
-
-```{tableofcontents}
-
-```

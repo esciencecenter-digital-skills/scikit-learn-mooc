@@ -20,14 +20,25 @@ parts:
     - file: python_scripts/02_numerical_pipeline_introduction
     - file: python_scripts/02_numerical_pipeline_ex_00
     - file: python_scripts/02_numerical_pipeline_sol_00
-    - file: linear_models/linear_models_slides
-    - file: python_scripts/02_numerical_pipeline_hands_on
-    - file: python_scripts/02_numerical_pipeline_ex_01
-    - file: python_scripts/02_numerical_pipeline_sol_01
-    - file: python_scripts/02_numerical_pipeline_scaling
+    #- file: linear_models/linear_models_slides
+    #- file: python_scripts/02_numerical_pipeline_hands_on
+    #- file: python_scripts/02_numerical_pipeline_ex_01
+    #- file: python_scripts/02_numerical_pipeline_sol_01
+    #- file: python_scripts/02_numerical_pipeline_scaling
     - file: predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation
     - file: python_scripts/02_numerical_pipeline_cross_validation
     - file: predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02
+- caption: Preprocessing
+  chapters:
+    #- file: preprocessing/0X_preprocessing_intro # TODO: add content here?
+    - file: preprocessing/0X_numerical_index
+      sections: # python scripts for notebooks, md files for quizzes/slides
+      - file: python_scripts/02_numerical_pipeline_hands_on
+      - file: python_scripts/02_numerical_pipeline_ex_01
+      - file: python_scripts/02_numerical_pipeline_sol_01
+      - file: python_scripts/02_numerical_pipeline_scaling
+    - file: preprocessing/0X_categorical_index
+    - file: preprocessing/0X_combining_index
 - caption: Categorical data
   chapters:
   - file: predictive_modeling_pipeline/03_categorical_pipeline_index
@@ -36,13 +47,13 @@ parts:
     - file: python_scripts/03_categorical_pipeline_ex_01
     - file: python_scripts/03_categorical_pipeline_sol_01
     - file: python_scripts/03_categorical_pipeline_column_transformer
-- caption: Decision tree models
-  chapters:
-  - file: trees/trees_module_intro
-  - file: trees/trees_intuitions_index
-    sections:
-    - file: trees/slides
-    - file: trees/trees_quiz_m5_01
+#- caption: Decision tree models
+#  chapters:
+#  - file: trees/trees_module_intro
+#  - file: trees/trees_intuitions_index
+#    sections:
+#    - file: trees/slides
+#    - file: trees/trees_quiz_m5_01
 - caption: Combining categorical and numerical data
   chapters:
   - file: predictive_modeling_pipeline/04_combining_mixed_data_index
@@ -76,4 +87,3 @@ parts:
   - file: appendix/acknowledgement
   - file: appendix/notebook_timings
   - file: appendix/toc_redirect
-

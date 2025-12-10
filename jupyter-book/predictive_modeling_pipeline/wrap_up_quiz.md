@@ -147,7 +147,7 @@ model predicts systematically better than the other.
 Another way is to compare cross-validation test scores of both models
 fold-to-fold, i.e. counting the number of folds where one model has a better
 test score than the other. This provides some extra information: are some
-partitions of the data making the classifaction task particularly easy or hard
+partitions of the data making the classification task particularly easy or hard
 for both models?
 
 Let's visualize the second approach.
@@ -155,10 +155,8 @@ Let's visualize the second approach.
 ![Fold-to-fold comparison](../../figures/numerical_pipeline_wrap_up_quiz_comparison.png)
 
 ```{admonition} Question
-Select the true statement.
-
-The number of folds where the model using all features perform better than the
-model using only numerical features lies in the range:
+Compare both models by counting on how many folds the model using all features
+has a better test score than the other. Select the correct statement:
 
 - a) [0, 3]: the model using all features is consistently worse
 - b) [4, 6]: both models are almost equivalent
@@ -166,4 +164,13 @@ model using only numerical features lies in the range:
 
 
 _Select a single answer_
+```
+
++++
+
+```{note}
+It is normal for this module to take longer than expected for people who are
+discovering Python programming, but don't get discouraged! The programming
+mechanisms will come with experience and the programming exercises in the
+following modules will seem more and more natural as time goes by.
 ```

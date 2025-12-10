@@ -39,7 +39,7 @@ adult_census = pd.read_csv("../datasets/adult-census-numeric.csv")
 # Let's have a look at the first records of this dataframe:
 
 # %%
-adult_census.head()
+adult_census
 
 # %% [markdown]
 # We see that this CSV file contains all information: the target that we would
@@ -56,10 +56,10 @@ target
 
 # %%
 data = adult_census.drop(columns=[target_name])
-data.head()
+data
 
 # %% [markdown]
-# We can now linger on the variables, also denominated features, that we later
+# We can now focus on the variables, also denominated features, that we later
 # use to build our predictive model. In addition, we can also check how many
 # samples are available in our dataset.
 
@@ -101,11 +101,18 @@ _ = model.fit(data, target)
 # ![Predictor fit diagram](../figures/api_diagram-predictor.fit.svg)
 #
 # In scikit-learn an object that has a `fit` method is called an **estimator**.
+# If the estimator additionally has :
+# - a  `predict` method, it is called a **predictor**. Examples of predictors
+#   are classifiers or regressors.
+# - a `transform` method, it is called a **transformer**. Examples of
+#   transformers are scalers or encoders. We will see more about transformers in
+#   the next notebook.
+#
 # The method `fit` is composed of two elements: (i) a **learning algorithm** and
 # (ii) some **model states**. The learning algorithm takes the training data and
 # training target as input and sets the model states. These model states are
-# later used to either predict (for classifiers and regressors) or transform
-# data (for transformers).
+# later used to either predict or transform data as explained above. See the
+# glossary for more detailed definitions.
 #
 # Both the learning algorithm and the type of model states are specific to each
 # type of model.
@@ -124,8 +131,7 @@ _ = model.fit(data, target)
 target_predicted = model.predict(data)
 
 # %% [markdown]
-# An estimator (an object with a `fit` method) with a `predict` method is called
-# a **predictor**. We can illustrate the prediction mechanism as follows:
+# We can illustrate the prediction mechanism as follows:
 #
 # ![Predictor predict diagram](../figures/api_diagram-predictor.predict.svg)
 #

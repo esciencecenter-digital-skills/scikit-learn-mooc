@@ -6,7 +6,7 @@
 # ---
 
 # %% [markdown]
-# # Encoding of categorical variables
+# # Working with categorical variables
 #
 # In this notebook, we present some typical ways of dealing with **categorical
 # variables** by encoding them, namely **ordinal encoding** and **one-hot

@@ -142,7 +142,7 @@ print(f"The dataset contains {adult_census.shape[1] - 1} features.")
 # for features containing numerical values:
 
 # %%
-_ = adult_census.hist(figsize=(20, 14))
+_ = adult_census.hist(figsize=(40, 8), layout=(1, 5))
 
 # %% [markdown]
 #

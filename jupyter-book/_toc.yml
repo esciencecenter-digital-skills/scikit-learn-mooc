@@ -20,31 +20,46 @@ parts:
     - file: python_scripts/02_numerical_pipeline_introduction
     - file: python_scripts/02_numerical_pipeline_ex_00
     - file: python_scripts/02_numerical_pipeline_sol_00
+  - file: predictive_modeling_pipeline/0X_preprocessing_index
+    sections:
+      # Numerical
+      - file: python_scripts/0X_preprocessing_numerical
+      - file: python_scripts/02_numerical_pipeline_ex_01
+      - file: python_scripts/02_numerical_pipeline_sol_01
+      # Categorical
+      #- file: python_scripts/0X_preprocessing_categorical
+      - file: python_scripts/03_categorical_pipeline
+      - file: python_scripts/03_categorical_pipeline_ex_01
+      - file: python_scripts/03_categorical_pipeline_sol_01
+      # Combine
+      #- file: python_scripts/0X_preprocessing_combine
+      - file: python_scripts/03_categorical_pipeline_column_transformer
     #- file: linear_models/linear_models_slides
     #- file: python_scripts/02_numerical_pipeline_hands_on
     #- file: python_scripts/02_numerical_pipeline_ex_01
     #- file: python_scripts/02_numerical_pipeline_sol_01
     #- file: python_scripts/02_numerical_pipeline_scaling
-    - file: predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation
-    - file: python_scripts/02_numerical_pipeline_cross_validation
-    - file: predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02
+    # TODO: the following files need to go somewhere else
+    #- file: predictive_modeling_pipeline/02_numerical_pipeline_video_cross_validation
+    #- file: python_scripts/02_numerical_pipeline_cross_validation
+    #- file: predictive_modeling_pipeline/02_numerical_pipeline_quiz_m1_02
 - caption: Preprocessing
   chapters:
     #- file: preprocessing/0X_preprocessing_intro # TODO: add content here?
-    - file: preprocessing/0X_numerical_index
-      sections: # python scripts for notebooks, md files for quizzes/slides
-      - file: python_scripts/02_numerical_pipeline_hands_on
-      - file: python_scripts/02_numerical_pipeline_ex_01
-      - file: python_scripts/02_numerical_pipeline_sol_01
-      - file: python_scripts/02_numerical_pipeline_scaling
-    - file: preprocessing/0X_categorical_index
-      sections:
-      - file: python_scripts/03_categorical_pipeline
-      - file: python_scripts/03_categorical_pipeline_ex_01
-      - file: python_scripts/03_categorical_pipeline_sol_01
+    #- file: preprocessing/0X_numerical_index
+    #  sections: # python scripts for notebooks, md files for quizzes/slides
+      #- file: python_scripts/02_numerical_pipeline_hands_on
+      #- file: python_scripts/02_numerical_pipeline_ex_01
+      #- file: python_scripts/02_numerical_pipeline_sol_01
+      #- file: python_scripts/02_numerical_pipeline_scaling
+    #- file: preprocessing/0X_categorical_index
+      #sections:
+      #- file: python_scripts/03_categorical_pipeline
+      #- file: python_scripts/03_categorical_pipeline_ex_01
+      #- file: python_scripts/03_categorical_pipeline_sol_01
     - file: preprocessing/0X_combining_index
       sections:
-      - file: python_scripts/03_categorical_pipeline_column_transformer
+      #- file: python_scripts/03_categorical_pipeline_column_transformer
       - file: predictive_modeling_pipeline/03_categorical_pipeline_visualization_video
       - file: python_scripts/03_categorical_pipeline_visualization
       - file: predictive_modeling_pipeline/03_categorical_pipeline_quiz_m1_03

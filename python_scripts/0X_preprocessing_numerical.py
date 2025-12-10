@@ -6,22 +6,22 @@
 # ---
 
 # %% [markdown]
-# # Working with numerical variables
+# # Preprocessing numerical features
 #
-# note: taken from `numerical_pipeline_hands_on.py`
+# > Note: The content in this notebook combines `02_numerical_pipeline_hands_on.py` and `02_numerical_pipeline_scaling.py`
+# from the original materials.
 #
 # In the previous notebook, we trained a k-nearest neighbors model on some data.
-#
 # However, we oversimplified the procedure by loading a dataset that contained
 # exclusively numerical data. Besides, we used datasets which were already split
 # into train-test sets.
 #
 # In this notebook, we aim at:
 #
-# * identifying numerical data in a heterogeneous dataset;
-# * selecting the subset of columns corresponding to numerical data;
 # * using a scikit-learn helper to separate data into train-test sets;
-# * training and evaluating a more complex scikit-learn model.
+# * training and evaluating a more complex scikit-learn model;
+# * an example of preprocessing: identifying, selecting and scaling numerical variables;
+# * using a scikit-learn **pipeline** to chain preprocessing and model training.
 #
 # We start by loading the adult census dataset used during the data exploration.
 #
@@ -36,20 +36,9 @@ import pandas as pd
 adult_census = pd.read_csv("../datasets/adult-census.csv")
 # drop the duplicated column `"education-num"` as stated in the first notebook
 adult_census = adult_census.drop(columns="education-num")
-adult_census
-
-# %% [markdown]
-# The next step separates the target from the data. We performed the same
-# procedure in the previous notebook.
-
-# %%
+# Separate target from the data
 data, target = adult_census.drop(columns="class"), adult_census["class"]
 
-# %%
-data
-
-# %%
-target
 
 # %% [markdown]
 # ```{note}
@@ -76,17 +65,10 @@ target
 # ```{caution}
 # Numerical data are represented with numbers, but numbers do not always
 # represent numerical data. Categories could already be encoded with
-# numbers and you may need to identify these features.
+# numbers and we may need to identify these features.
 # ```
 #
-# Thus, we can check the data type for each of the column in the dataset.
-
-# %%
-data.dtypes
-
-# %% [markdown]
-# We seem to have only two data types: `int64` and `object`. We can make sure by
-# checking for unique data types.
+# Thus, we can check all data types of columns in the dataset.
 
 # %%
 data.dtypes.unique()
@@ -94,10 +76,13 @@ data.dtypes.unique()
 # %% [markdown]
 # Indeed, the only two types in the dataset are integer `int64` and `object`. We
 # can look at the first few lines of the dataframe to understand the meaning of
-# the `object` data type.
+# the `object` data type. We use a few variables to represent the general idea.
 
 # %%
-data
+data[["age", "hours-per-week", "sex", "race"]].dtypes
+
+# %%
+data[["age", "hours-per-week", "sex", "race"]].head()
 
 # %% [markdown]
 # We see that the `object` data type corresponds to columns containing strings.
@@ -107,28 +92,10 @@ data
 
 # %%
 numerical_columns = ["age", "capital-gain", "capital-loss", "hours-per-week"]
-data[numerical_columns]
+data[numerical_columns].head()
 
 # %% [markdown]
-# Now that we limited the dataset to numerical columns only, we can analyse
-# these numbers to figure out what they represent. We can identify two types of
-# usage.
-#
-# The first column, `"age"`, is self-explanatory. We can note that the values
-# are continuous, meaning they can take up any number in a given range. Let's
-# find out what this range is:
-
-# %%
-data["age"].describe()
-
-# %% [markdown]
-# We can see the age varies between 17 and 90 years.
-#
-# We could extend our analysis and we would find that `"capital-gain"`,
-# `"capital-loss"`, and `"hours-per-week"` are also representing quantitative
-# data.
-#
-# Now, we store the subset of numerical columns in a new dataframe.
+# We store the subset of numerical columns in a new dataframe.
 
 # %%
 data_numeric = data[numerical_columns]
@@ -136,14 +103,12 @@ data_numeric = data[numerical_columns]
 # %% [markdown]
 # ## Train-test split the dataset
 #
-# In the previous notebook, we loaded two separate datasets: a training one and
-# a testing one. However, having separate datasets in two distincts files is
-# unusual: most of the time, we have a single file containing all the data that
-# we need to split once loaded in the memory.
-#
-# Scikit-learn provides the helper function
-# `sklearn.model_selection.train_test_split` which is used to automatically
+# In the previous notebook, we loaded data from two separate datasets: a training one and
+# a testing one.
+# A better way is to do this automatically. In scikit-learn, we can use the helper function
+# `sklearn.model_selection.train_test_split` to
 # split the dataset into two subsets.
+# Later, we will see that this is useful when building bigger pipelines with `sklearn`.
 
 # %%
 from sklearn.model_selection import train_test_split
@@ -158,33 +123,18 @@ data_train, data_test, target_train, target_test = train_test_split(
 # deterministic results when we use a random number generator. In the
 # `train_test_split` case the randomness comes from shuffling the data, which
 # decides how the dataset is split into a train and a test set).
+# Here, we assigned 25% of the sampels to the testing set (which is also the default) and 75% of the samples
+# to the training set.
 # ```
 
-# %% [markdown]
-# When calling the function `train_test_split`, we specified that we would like
-# to have 25% of samples in the testing set while the remaining samples (75%)
-# are assigned to the training set. We can check quickly if we got what we
-# expected.
-
-# %%
-print(
-    f"Number of samples in testing: {data_test.shape[0]} => "
-    f"{data_test.shape[0] / data_numeric.shape[0] * 100:.1f}% of the"
-    " original set"
-)
-
-# %%
-print(
-    f"Number of samples in training: {data_train.shape[0]} => "
-    f"{data_train.shape[0] / data_numeric.shape[0] * 100:.1f}% of the"
-    " original set"
-)
 
 # %% [markdown]
-# In the previous notebook, we used a k-nearest neighbors model. While this
-# model is intuitive to understand, it is not widely used in practice. Now, we
-# use a more useful model, called a logistic regression, which belongs to the
-# linear models family.
+# ## Model fitting without preprocessing
+#
+# Instead of the k-nearest neighbors model, we use a logistic regression model.
+# This belongs to the family of linear models, and is more widely used than
+# the k-nearest neighbors model.
+#
 #
 # ```{note}
 # To recap, linear models find a set of weights to combine features linearly
@@ -195,7 +145,7 @@ print(
 #
 # ```
 #
-# To create a logistic regression model in scikit-learn you can do:
+# To create a logistic regression model in scikit-learn we can do:
 
 # %%
 from sklearn.linear_model import LogisticRegression
@@ -203,8 +153,8 @@ from sklearn.linear_model import LogisticRegression
 model = LogisticRegression()
 
 # %% [markdown]
-# Now that the model has been created, you can use it exactly the same way as we
-# used the k-nearest neighbors model in the previous notebook. In particular, we
+# Now that the model has been created, we can use it exactly the same way as we
+# used the k-nearest neighbors model previously. In particular, we
 # can use the `fit` method to train the model using the training data and
 # labels:
 
@@ -219,70 +169,6 @@ model.fit(data_train, target_train)
 accuracy = model.score(data_test, target_test)
 print(f"Accuracy of logistic regression: {accuracy:.3f}")
 
-# %% [markdown]
-# ## Notebook recap
-#
-# In scikit-learn, the `score` method of a classification model returns the
-# accuracy, i.e. the fraction of correctly classified samples. In this case,
-# around 8 / 10 of the times the logistic regression predicts the right income
-# of a person. Now the real question is: is this generalization performance
-# relevant of a good predictive model? Find out by solving the next exercise!
-#
-# In this notebook, we learned to:
-#
-# * identify numerical data in a heterogeneous dataset;
-# * select the subset of columns corresponding to numerical data;
-# * use the scikit-learn `train_test_split` function to separate data into a
-#   train and a test set;
-# * train and evaluate a logistic regression model.
-
-
-# %% [markdown]
-# # Preprocessing for numerical features
-#
-# Note: taken from `numerical_pipeline_scaling.py`
-#
-# In this notebook, we still use numerical features only.
-#
-# Here we introduce these new aspects:
-#
-# * an example of preprocessing, namely **scaling numerical variables**;
-# * using a scikit-learn **pipeline** to chain preprocessing and model training.
-#
-# ## Data preparation
-#
-# First, let's load the full adult census dataset.
-
-# %%
-import pandas as pd
-
-adult_census = pd.read_csv("../datasets/adult-census.csv")
-
-# %% [markdown]
-# We now drop the target from the data we use to train our predictive model.
-
-# %%
-target_name = "class"
-target = adult_census[target_name]
-data = adult_census.drop(columns=target_name)
-
-# %% [markdown]
-# Then, we select only the numerical columns, as seen in the previous notebook.
-
-# %%
-numerical_columns = ["age", "capital-gain", "capital-loss", "hours-per-week"]
-
-data_numeric = data[numerical_columns]
-
-# %% [markdown]
-# Finally, we can divide our dataset into a train and test sets.
-
-# %%
-from sklearn.model_selection import train_test_split
-
-data_train, data_test, target_train, target_test = train_test_split(
-    data_numeric, target, random_state=42
-)
 
 # %% [markdown]
 # ## Model fitting with preprocessing
@@ -538,7 +424,7 @@ print(f"The accuracy using a {model_name} is {score:.3f} ")
 # We can compare the pipeline using scaling and logistic regression with
 # using a logistic regression model without scaling like we did before.
 # We will not go into how to do this comparison with Python in sake of time,
-# instead we directly give you the results:
+# instead we directly give the results:
 #
 # The accuracy using a Pipeline is 0.807 with a fitting time of
 # 0.043 seconds in 9 iterations
@@ -561,7 +447,17 @@ print(f"The accuracy using a {model_name} is {score:.3f} ")
 # ```
 
 # %% [markdown]
-# In this notebook we:
+# ## Notebook recap
 #
-# * saw the importance of **scaling numerical variables**;
-# * used a **pipeline** to chain scaling and logistic regression training.
+# In scikit-learn, the `score` method of a classification model returns the
+# accuracy, i.e. the fraction of correctly classified samples. In this case,
+# around 8 / 10 of the times the logistic regression predicts the right income
+# of a person. Now the real question is: is this generalization performance
+# relevant of a good predictive model? Find out by solving the next exercise!
+#
+# In this notebook, we learned:
+#
+# * to use a scikit-learn helper to separate data into train-test sets;
+# * to train and evaluate a more complex scikit-learn model;
+# * about preprocessing for numerical variables;
+# * to use a scikit-learn **pipeline** to chain preprocessing and model training.

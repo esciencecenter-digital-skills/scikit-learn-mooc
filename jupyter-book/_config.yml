@@ -76,7 +76,7 @@ sphinx:
 #######################################################################################
 # Launch button settings
 repository:
-  url                         : https://github.com/INRIA/scikit-learn-mooc
+  url                         : https://github.com/esciencecenter-digital-skills/scikit-learn-mooc
   branch: main
 
 launch_buttons:

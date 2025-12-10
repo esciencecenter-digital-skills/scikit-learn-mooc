@@ -60,11 +60,6 @@ parts:
   - file: overfit/learning_validation_curves_slides
   - file: python_scripts/cross_validation_ex_01.py
   - file: python_scripts/cross_validation_sol_01.py
-- caption: Advanced topics
-  chapters:
-  - file: advanced_topics/advanced_topics_module_intro
-  - file: advanced_topics/advanced_topics_slides
-  - file: advanced_topics/advanced_topics_resources
 - caption: Concluding remarks
   chapters:
   - file: concluding_remarks_video.md

@@ -6,7 +6,7 @@
 # ---
 
 # %% [markdown]
-# # Using numerical and categorical variables together
+# # Using numerical and categorical features together
 #
 # > Note: this is a shortened version of `03_categorical_pipeline_column_transformer.py`
 #
@@ -163,53 +163,10 @@ _ = model.fit(data_train, target_train)
 # Then, we can send the raw dataset straight to the pipeline. Indeed, we do not
 # need to make any manual preprocessing (calling the `transform` or
 # `fit_transform` methods) as it is already handled when calling the `predict`
-# method. As an example, we predict on the five first samples from the test set.
-
-# %%
-data_test
-
-# %%
-model.predict(data_test)[:5]
-
-# %%
-target_test[:5]
+# method.
 
 # %% [markdown]
-# To get directly the accuracy score, we need to call the `score` method. Let's
-# compute the accuracy score on the entire test set.
+# We can call the `score` method to compute the accuracy score on the test set.
 
 # %%
 model.score(data_test, target_test)
-
-# %% [markdown]
-# ## Evaluation of the model with cross-validation
-# TODO: this should come after cross-validation; we could create an exercise with it
-#
-# As previously stated, a predictive model should be evaluated by
-# cross-validation. Our model is usable with the cross-validation tools of
-# scikit-learn as any other predictors:
-
-# %%
-from sklearn.model_selection import cross_validate
-
-cv_results = cross_validate(model, data, target, cv=5)
-cv_results
-
-# %%
-scores = cv_results["test_score"]
-print(
-    "The mean cross-validation accuracy is: "
-    f"{scores.mean():.3f} ± {scores.std():.3f}"
-)
-
-# %% [markdown]
-# The compound model has a higher predictive accuracy than the two models that
-# used numerical and categorical variables in isolation.
-
-# %% [markdown]
-# In this notebook we:
-#
-# * used a `ColumnTransformer` to apply different preprocessing for categorical
-#   and numerical variables;
-# * used a pipeline to chain the `ColumnTransformer` preprocessing and logistic
-#   regression fitting.

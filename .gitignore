@@ -5,6 +5,7 @@ wrap-up/
 
 # jupyter-book
 jupyter-book/_build
+jupyter-book/build.log
 
 # HTML slides are generated from the markdown source and should generally not
 # be committed. There are also some html files in the slides folder that do not

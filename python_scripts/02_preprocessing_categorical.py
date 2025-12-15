@@ -6,7 +6,9 @@
 # ---
 
 # %% [markdown]
-# # Working with categorical variables
+# # Preprocessing categorical features
+#
+# > Note: This is a shortened version of `03_categorical_pipeline.py`.
 #
 # In this notebook, we present some typical ways of dealing with **categorical
 # variables** by encoding them, namely **ordinal encoding** and **one-hot
@@ -48,22 +50,24 @@ data = adult_census.drop(columns=[target_name])
 data["native-country"].value_counts().sort_index()
 
 # %% [markdown]
-# How can we easily recognize categorical columns among the dataset? Part of
-# the answer lies in the columns' data type:
+# Recall from the previous section that `pandas` stores the `dtype` of each column:
 
 # %%
-data.dtypes
+data[["native-country"]].dtypes
+
 
 # %% [markdown]
 # If we look at the `"native-country"` column, we observe its data type is
 # `object`, meaning it contains string values.
 #
 # ## Select features based on their data type
-#
+
+
+# %% [markdown]
 # In the previous notebook, we manually defined the numerical columns. We could
 # do a similar approach. Instead, we can use the scikit-learn helper function
 # `make_column_selector`, which allows us to select columns based on their data
-# type. We now illustrate how to use this helper.
+# type. We now show how to use this helper.
 
 # %%
 from sklearn.compose import make_column_selector as selector
@@ -80,7 +84,7 @@ categorical_columns
 
 # %%
 data_categorical = data[categorical_columns]
-data_categorical
+data_categorical.head()
 
 # %%
 print(f"The dataset is composed of {data_categorical.shape[1]} features")
@@ -106,7 +110,7 @@ education_column = data_categorical[["education"]]
 
 encoder = OrdinalEncoder().set_output(transform="pandas")
 education_encoded = encoder.fit_transform(education_column)
-education_encoded
+education_encoded.head()
 
 # %% [markdown]
 # We see that each category in `"education"` has been replaced by a numeric
@@ -121,7 +125,7 @@ encoder.categories_
 
 # %%
 data_encoded = encoder.fit_transform(data_categorical)
-data_encoded[:5]
+data_encoded.head()
 
 # %%
 print(f"The dataset encoded contains {data_encoded.shape[1]} features")
@@ -171,7 +175,7 @@ from sklearn.preprocessing import OneHotEncoder
 
 encoder = OneHotEncoder(sparse_output=False).set_output(transform="pandas")
 education_encoded = encoder.fit_transform(education_column)
-education_encoded
+education_encoded.head()
 
 # %% [markdown]
 # ```{note}
@@ -193,11 +197,11 @@ education_encoded
 
 # %%
 print(f"The dataset is composed of {data_categorical.shape[1]} features")
-data_categorical
+data_categorical.head()
 
 # %%
 data_encoded = encoder.fit_transform(data_categorical)
-data_encoded[:5]
+data_encoded.head()
 
 # %%
 print(f"The encoded dataset contains {data_encoded.shape[1]} features")
@@ -245,24 +249,21 @@ print(f"The encoded dataset contains {data_encoded.shape[1]} features")
 # exercise** of this sequence.
 
 # %% [markdown]
-# ## Evaluate our predictive pipeline
+# ## Dealing with unknown categories
 #
-# We can now integrate this encoder inside a machine learning pipeline like we
-# did with numerical data: let's train a linear classifier on the encoded data
-# and check the generalization performance of this machine learning pipeline using
-# cross-validation.
-#
-# Before we create the pipeline, we have to focus on the `native-country`.
-# Let's recall some statistics regarding this column.
+# Let's recall some statistics regarding the `native-country` column.
+
 
 # %%
 data["native-country"].value_counts()
 
+
 # %% [markdown]
-# We see that the `"Holand-Netherlands"` category is occurring rarely. This will
-# be a problem during cross-validation: if the sample ends up in the test set
-# during splitting then the classifier would not have seen the category during
-# training and would not be able to encode it.
+# `"Holand-Netherlands"` category is occurs only once.
+# This is be a problem when the train-test split puts the sample into the
+# test split.
+# Then, the model will train fine without this group, but will encounter a new
+# group when making predictions on unseen data.
 #
 # In scikit-learn, there are some possible solutions to bypass this issue:
 #
@@ -292,46 +293,6 @@ data["native-country"].value_counts()
 # which are not part of the data encountered during the `fit` call. You are
 # going to use these parameters in the next exercise.
 # ```
-
-# %% [markdown]
-# We can now create our machine learning pipeline.
-
-# %%
-from sklearn.pipeline import make_pipeline
-from sklearn.linear_model import LogisticRegression
-
-model = make_pipeline(
-    OneHotEncoder(handle_unknown="ignore"), LogisticRegression(max_iter=500)
-)
-
-# %% [markdown]
-# ```{note}
-# Here, we need to increase the maximum number of iterations to obtain a fully
-# converged `LogisticRegression` and silence a `ConvergenceWarning`. Contrary
-# to the numerical features, the one-hot encoded categorical features are all
-# on the same scale (values are 0 or 1), so they would not benefit from
-# scaling. In this case, increasing `max_iter` is the right thing to do.
-# ```
-
-# %% [markdown]
-# Finally, we can check the model's generalization performance only using the
-# categorical columns.
-
-# %%
-from sklearn.model_selection import cross_validate
-
-cv_results = cross_validate(model, data_categorical, target)
-cv_results
-
-# %%
-scores = cv_results["test_score"]
-print(f"The accuracy is: {scores.mean():.3f} ± {scores.std():.3f}")
-
-# %% [markdown]
-# As you can see, this representation of the categorical variables is slightly
-# more predictive of the revenue than the numerical variables that we used
-# previously. The reason being that we have more (predictive) categorical
-# features than numerical ones.
 
 # %% [markdown]
 #

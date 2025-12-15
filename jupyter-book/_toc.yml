@@ -3,6 +3,9 @@ root: toc
 parts:
 - chapters:
   - file: index
+- caption: Setting the stage
+  chapters:
+  - file: setting_stage_slides
 - caption: Machine Learning Concepts
   chapters:
   - file: ml_concepts/slides

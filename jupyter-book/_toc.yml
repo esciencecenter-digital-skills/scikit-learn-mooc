@@ -77,7 +77,6 @@ parts:
   - file: tuning/parameter_tuning_module_take_away
 - caption: Concluding remarks
   chapters:
-  - file: concluding_remarks_video.md
   - file: concluding_remarks.md
 - caption: Appendix
   chapters:

@@ -66,7 +66,10 @@ model = make_pipeline(
 
 # %% [markdown]
 # Your model is now defined. Evaluate it using a cross-validation using
-# `sklearn.model_selection.cross_validate`.
+# `sklearn.model_selection.cross_validate`. Details about this function
+# are introduced in the next chapter. For now, it is enough to know that this
+# function informs about how well the model performs on data it has not been
+# trained on.
 #
 # ```{note}
 # Be aware that if an error happened during the cross-validation,

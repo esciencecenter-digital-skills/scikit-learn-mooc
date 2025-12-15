@@ -72,6 +72,9 @@ parts:
     - file: tuning/parameter_tuning_automated_quiz_m3_02
   - file: tuning/parameter_tuning_wrap_up_quiz.md
   - file: tuning/parameter_tuning_module_take_away
+- caption: Final exercise
+  chapters:
+  - file: python_scripts/final_exercise
 - caption: Concluding remarks
   chapters:
   - file: concluding_remarks_video.md

@@ -126,43 +126,6 @@ Machine learning in a nutshell, we have seen that
 
 ---
 
-# 3. Specific models
-
-* Understanding the models
-    - know when they are suited to the data
-    - intuitions on how to debug them
-
-???
-
-- Understanding the models, in the sense of how they build their predictive functions, helps knowing when they are suited to the data and having intuitions on how to debug them
-
---
-
-* Linear models: combining the values of features
-  - For many features or few observations
-
-???
-
-- Linear models make decisions by combining the values of each feature. They are particularly suited when the number of features is large or the number of observations is small
-
---
-
-* Tree-based: a series of binary choices (thresholds)
-    - For tabular data, columns of different nature
-    - HistGradientBoostingRegressor and Classifier are goto methods
-
-???
-
-- Tree-based models
-  - combine a series of binary choices, such as thresholds on the values of
-    various attributes.
-  - They are particularly suited to tabular data where columns are quantities of different nature (age, height, job title), a mixing of categorical and continuous
-variables, or have missing values.
-  - The gradient boosted trees (HistGradientBoostingRegressor and Classifier) are typically goto methods when there are more than a few thousands of samples
-
----
-
-
 # Learning more about scikit-learn
 
 - The scikit-learn doc

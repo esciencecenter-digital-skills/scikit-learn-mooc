@@ -3,6 +3,9 @@ root: toc
 parts:
 - chapters:
   - file: index
+- caption: Setting the stage
+  chapters:
+  - file: setting_stage_slides
 - caption: Machine Learning Concepts
   chapters:
   - file: ml_concepts/slides
@@ -77,15 +80,14 @@ parts:
   - file: python_scripts/final_exercise
 - caption: Concluding remarks
   chapters:
-  - file: concluding_remarks_video.md
   - file: concluding_remarks.md
 - caption: Appendix
   chapters:
   - file: appendix/glossary
   - file: appendix/datasets_intro
     sections:
-    - file: python_scripts/trees_dataset
     - file: python_scripts/datasets_adult_census
+    - file: python_scripts/blood_transfusion
     - file: python_scripts/datasets_california_housing
     - file: python_scripts/datasets_ames_housing
   - file: appendix/acknowledgement

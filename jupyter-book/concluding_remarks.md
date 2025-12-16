@@ -50,26 +50,6 @@
   - In scikit-learn this is done with objects such as GridSearchCV,
     RandomSearchCV...
 
-### 3. Specific models
-
-- Understanding the models
-  - Helps knowing when they are suited to the data
-  - Gives intuitions on how to debug them
-
-- Linear models
-  - build predictions by combining the values of features
-  - Particularly useful for data with many features or few observations
-  - Can benefit from non-linear feature engineering
-
-- Tree-based models:
-  - Build predictions by combining a series of binary choices (such as
-    thresholds on the values of the various attributes)
-  - Particularly suited for tabular data, where columns are quantities
-    of different nature, or have missing values
-  - HistGradientBoostingRegressor and Classifier are goto methods that
-    you are strongly advised to check out
-
-
 ## Going further with machine learning
 
 Let us give a few pointers on going further with machine learning.
